@@ -15,7 +15,7 @@
             />
             <span class="description">Город А</span>
             <q-input v-model="cityTo" type="text" dense class="input" filled />
-            <span class="description">Количество дней</span>
+            <span class="description">Количество дней (суточные)</span>
             <q-input
               v-model="amountOfDay"
               type="number"
@@ -26,19 +26,25 @@
           </div>
           <!--  -->
           <div class="col">
-            <span class="description">Аванс</span>
+            <span class="description">Номер приказа</span>
             <q-input
-              v-model="prepaid_expense"
-              type="number"
+              v-model="order_number"
+              type="text"
               dense
               class="input"
               filled
             />
-            <span class="description">Город А</span>
-            <q-input v-model="cityTo" type="text" dense class="input" filled />
-            <span class="description">Количество дней</span>
+            <span class="description">Город Б</span>
             <q-input
-              v-model="amountOfDay"
+              v-model="cityFrom"
+              type="text"
+              dense
+              class="input"
+              filled
+            />
+            <span class="description">Количество дней (проживание)</span>
+            <q-input
+              v-model="amountOfDayResidence"
               type="number"
               dense
               class="input"
