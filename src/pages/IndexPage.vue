@@ -53,11 +53,35 @@
           </div>
         </section>
       </q-card>
+      <q-card class="card">
+        <section class="row q-gutter-md">
+          <p class="headline" align="center">Данные по приезду</p>
+        </section>
+      </q-card>
+
+      <q-card-actions align="center">
+        <q-btn
+          no-caps
+          color="positive"
+          label="Cформировать отчет"
+          @click="generateReport"
+        />
+      </q-card-actions>
     </section>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
+import { useQuasar } from "quasar";
+const prepaid_expense = ref("");
+const $q = useQuasar();
+const generateReport = () => {
+  $q.notify({
+    message: prepaid_expense.value,
+  });
+};
+</script>
 
 <style scoped>
 .data {
@@ -67,10 +91,12 @@
 .headline {
   font-weight: bold;
   font-size: 20px;
+  justify-content: center;
 }
 
 .card {
   border-radius: 10px;
   padding: 10px;
+  margin-bottom: 15px;
 }
 </style>
