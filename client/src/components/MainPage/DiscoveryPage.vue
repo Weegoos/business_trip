@@ -19,7 +19,7 @@
                 class="button"
                 :id="items.style"
                 :label="items.name"
-                @click="onClick"
+                @click="navigation(items.link)"
               />
             </div>
           </section>
@@ -32,17 +32,24 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const button = ref([
   {
     name: "Learn More",
     style: "learnMoreButton",
+    link: "/learnMoreAboutDiscovery",
   },
   {
     name: "Browse Properties",
     style: "browseProperties",
+    link: "/linkBrowseProperties",
   },
 ]);
+const router = useRouter();
+const navigation = (route) => {
+  router.push(route);
+};
 </script>
 
 <style scoped>
