@@ -11,7 +11,7 @@
             our listings to find the home that matches your dreams.
           </p>
         </div>
-        <div class="q-mt-lg">
+        <div class="q-my-xl">
           <section class="row q-gutter-md">
             <div v-for="(items, id) in button" :key="id">
               <q-btn
@@ -21,6 +21,16 @@
                 :label="items.name"
                 @click="navigation(items.link)"
               />
+            </div>
+          </section>
+        </div>
+        <div class="statsContainer">
+          <section class="row q-gutter-md">
+            <div class="col" v-for="(items, id) in stats" :key="id">
+              <q-card class="statsWrapper">
+                <p class="text-h6 text-bold">{{ items.number }}+</p>
+                <p class="text-body1">{{ items.description }}</p>
+              </q-card>
             </div>
           </section>
         </div>
@@ -50,6 +60,21 @@ const router = useRouter();
 const navigation = (route) => {
   router.push(route);
 };
+
+const stats = ref([
+  {
+    number: 200,
+    description: "Happy Customers",
+  },
+  {
+    number: 1000,
+    description: "Properties For Clients",
+  },
+  {
+    number: 16,
+    description: "Years of Experience",
+  },
+]);
 </script>
 
 <style scoped>
@@ -74,5 +99,10 @@ const navigation = (route) => {
 
 #browseProperties {
   background-color: #703bf7;
+}
+
+.statsWrapper {
+  background-color: #262626;
+  padding: 20px;
 }
 </style>
