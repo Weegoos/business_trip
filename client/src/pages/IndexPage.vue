@@ -1,9 +1,15 @@
 <template>
-  <div class="text-white">Batyr</div>
+  <div class="text-white">
+    <section>
+      <div>
+        <DiscoveryPage />
+      </div>
+    </section>
+  </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import DiscoveryPage from "../components/MainPage/DiscoveryPage.vue";
 </script>
 
 <style></style>

@@ -74,7 +74,7 @@
       >
       </q-drawer>
       <q-page-container class="body">
-        <q-page>
+        <q-page class="body">
           <router-view />
         </q-page>
       </q-page-container>
