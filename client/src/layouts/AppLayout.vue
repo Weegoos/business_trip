@@ -1,7 +1,48 @@
 <template>
   <div>
     <q-layout view="lHr LpR lFf" container style="height: 100vh">
-      <q-header reveal elevated bordered class="header"> batyr </q-header>
+      <q-header reveal elevated bordered class="header">
+        <q-toolbar class="bg-black text-white header">
+          <div class="container row">
+            <section class="name col">
+              <p class="text-h6 q-mt-md">Estatiin</p>
+            </section>
+            <section class="col buttonSection" align="center">
+              <q-btn flat no-caps label="Home" @click="onClick" class="btn" />
+              <q-btn
+                flat
+                no-caps
+                label="About Us"
+                @click="onClick"
+                class="btn"
+              />
+              <q-btn
+                flat
+                no-caps
+                label="Properties"
+                @click="onClick"
+                class="btn"
+              />
+              <q-btn
+                flat
+                no-caps
+                label="Services"
+                @click="onClick"
+                class="btn"
+              />
+            </section>
+            <section class="col buttonSection" align="right">
+              <q-btn
+                flat
+                no-caps
+                label="Contact Us"
+                @click="onClick"
+                class="btn"
+              />
+            </section>
+          </div>
+        </q-toolbar>
+      </q-header>
       <q-page-container>
         <q-page class="body">
           <router-view />
@@ -35,4 +76,20 @@ const button = ref([
 ]);
 </script>
 
-<style scoped></style>
+<style scoped>
+.container {
+  width: 100%;
+}
+
+.btn {
+  font-size: 16px;
+}
+
+.header {
+  height: 60px;
+}
+
+.buttonSection {
+  margin-top: 13px;
+}
+</style>
