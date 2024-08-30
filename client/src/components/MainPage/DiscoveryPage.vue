@@ -35,7 +35,37 @@
           </section>
         </div>
       </div>
-      <div class="col"></div>
+      <div class="col">
+        <q-img
+          src="../../assets/indexPage/Image.png"
+          :ratio="18 / 10"
+          spinner-color="primary"
+          spinner-size="82px"
+        />
+      </div>
+    </section>
+    <section>
+      <div class="row">
+        <section
+          class="col bg-black q-pa-sm"
+          v-for="(items, id) in links"
+          :key="id"
+        >
+          <q-card class="statsWrapper">
+            <div align="center">
+              <q-avatar
+                size="50px"
+                font-size="25px"
+                color="black"
+                text-color="white"
+                icon="directions"
+                class="q-mb-sm"
+              />
+              <p>{{ items.name }}</p>
+            </div>
+          </q-card>
+        </section>
+      </div>
     </section>
   </div>
 </template>
@@ -73,6 +103,22 @@ const stats = ref([
   {
     number: 16,
     description: "Years of Experience",
+  },
+]);
+
+const links = ref([
+  {
+    icon: "",
+    name: "Find Your Dream Home",
+  },
+  {
+    name: "Unlock Property Value",
+  },
+  {
+    name: "Effortless Property Management",
+  },
+  {
+    name: "Smart Investments, Informed Decisions",
   },
 ]);
 </script>
