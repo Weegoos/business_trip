@@ -2,6 +2,14 @@
   <div>
     <q-layout view="lHr LpR lFf" container style="height: 100vh">
       <q-header reveal elevated bordered class="header">
+        <div class="news row q-gutter-sm">
+          <section class="col q-mt-lg" align="right">
+            <p>Discover Your Dream Property with Estatein</p>
+          </section>
+          <section class="col q-mt-md">
+            <q-btn no-caps flat label="Learn More" @click="onClick" />
+          </section>
+        </div>
         <q-toolbar class="bg-black text-white header">
           <div class="container row">
             <section class="name col">
@@ -91,5 +99,12 @@ const button = ref([
 
 .buttonSection {
   margin-top: 13px;
+}
+
+.news {
+  background-color: #1a1a1a;
+  color: white;
+  height: 55px;
+  width: 100%;
 }
 </style>
