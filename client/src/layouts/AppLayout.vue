@@ -63,9 +63,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
+import { ref, watch } from "vue";
+import { useQuasar } from "quasar";
+import { useRoute } from "vue-router";
 const drawer = ref(true);
+const $q = useQuasar();
 const button = ref([
   {
     name: "Home",
@@ -84,6 +86,20 @@ const button = ref([
     link: "/services",
   },
 ]);
+
+const route = useRoute();
+const currentPath = ref(route.path);
+console.log(currentPath.value);
+
+watch(
+  () => currentPath.value,
+  (newVal) => {
+    $q.notify({
+      message: newVal,
+    });
+    console.log(newVal);
+  }
+);
 </script>
 
 <style scoped>
