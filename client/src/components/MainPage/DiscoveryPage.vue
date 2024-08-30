@@ -58,7 +58,7 @@
                 font-size="25px"
                 color="black"
                 text-color="white"
-                icon="directions"
+                :icon="items.icon"
                 class="q-mb-sm"
               />
               <p>{{ items.name }}</p>
@@ -73,7 +73,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-
+import Container1 from "../../assets/indexPage/Image.png";
 const button = ref([
   {
     name: "Learn More",
@@ -108,7 +108,7 @@ const stats = ref([
 
 const links = ref([
   {
-    icon: "",
+    icon: Container1,
     name: "Find Your Dream Home",
   },
   {
