@@ -3,15 +3,17 @@
     <q-layout view="lHr LpR lFf" container style="height: 100vh">
       <q-header reveal elevated bordered class="header">
         <div class="news row q-gutter-sm">
-          <section class="col q-mt-lg" align="right">
-            <p>Discover Your Dream Property with Estatein</p>
-          </section>
-          <section class="col q-mt-md">
-            <q-btn no-caps flat label="Learn More" @click="onClick" />
-          </section>
+          <div class="col q-mt-md" align="center">
+            <span class="q-mr-md"
+              >Discover Your Dream Property with Estatein</span
+            >
+            <q-btn no-caps flat label="Learn More" @click="learnMore" dense />
+          </div>
+          <q-btn flat icon="close" dense @click="onClick" />
         </div>
         <q-toolbar class="bg-black text-white header">
           <div class="container row">
+            <img class="icon" src="../assets/header/Symbol.png" alt="" />
             <section class="name col">
               <p class="text-h6 q-mt-md">Estatiin</p>
             </section>
@@ -106,5 +108,12 @@ const button = ref([
   color: white;
   height: 55px;
   width: 100%;
+}
+
+.icon {
+  height: 25px;
+  margin-top: 20px;
+  margin-left: 15px;
+  margin-right: 10px;
 }
 </style>
