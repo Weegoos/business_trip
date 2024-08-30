@@ -18,13 +18,21 @@
               <p class="text-h6 q-mt-md">Estatiin</p>
             </section>
             <section class="col buttonSection" align="center">
-              <q-btn flat no-caps label="Home" @click="onClick" class="btn" />
+              <q-btn
+                flat
+                no-caps
+                label="Home"
+                @click="onClick"
+                class="btn"
+                :class="currentPath === '/' ? 'active' : 'unactive'"
+              />
               <q-btn
                 flat
                 no-caps
                 label="About Us"
                 @click="onClick"
                 class="btn"
+                :class="currentPath === '/about' ? 'active' : 'unactive'"
               />
               <q-btn
                 flat
@@ -32,6 +40,7 @@
                 label="Properties"
                 @click="onClick"
                 class="btn"
+                :class="currentPath === '/properties' ? 'active' : 'unactive'"
               />
               <q-btn
                 flat
@@ -39,6 +48,7 @@
                 label="Services"
                 @click="onClick"
                 class="btn"
+                :class="currentPath === '/services' ? 'active' : 'unactive'"
               />
             </section>
             <section class="col buttonSection" align="right">
@@ -48,6 +58,7 @@
                 label="Contact Us"
                 @click="onClick"
                 class="btn"
+                :class="currentPath === '/contact' ? 'active' : 'unactive'"
               />
             </section>
           </div>
@@ -101,10 +112,11 @@ const currentPath = ref(route.path);
 console.log(currentPath.value);
 
 watch(
-  () => currentPath.value,
+  () => route.path,
   (newVal) => {
+    currentPath.value = newVal;
     $q.notify({
-      message: newVal,
+      message: `New path: ${currentPath.value}`,
     });
     console.log(newVal);
   }
