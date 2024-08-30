@@ -1,0 +1,17 @@
+{
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": [
+    "source.fixAll.eslint"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "vue"
+  ],
+  "python.pythonPath": "/home/batyr_ashim/Рабочий стол/Мои проекты/business_trip/.venv/bin/python",
+  "python.languageServer": "pylance"
+}
