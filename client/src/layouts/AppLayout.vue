@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-layout view="lHr LpR lFf" container style="height: 100vh">
-      <q-header reveal elevated bordered class="bg-black">
+      <q-header reveal elevated bordered style="background-color: #1a1a1a">
         <div class="news row q-gutter-sm">
           <div class="col q-mt-md" align="center">
             <span class="q-mr-md"
@@ -22,7 +22,7 @@
                 flat
                 no-caps
                 label="Home"
-                @click="onClick"
+                @click="pushToMainPage"
                 class="btn"
                 :class="currentPath === '/' ? 'active' : 'unactive'"
               />
@@ -30,7 +30,7 @@
                 flat
                 no-caps
                 label="About Us"
-                @click="onClick"
+                @click="pushToAboutPage"
                 class="btn"
                 :class="currentPath === '/about' ? 'active' : 'unactive'"
               />
@@ -85,7 +85,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import { useQuasar } from "quasar";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 const drawer = ref(true);
 const $q = useQuasar();
 const button = ref([
@@ -115,12 +115,21 @@ watch(
   () => route.path,
   (newVal) => {
     currentPath.value = newVal;
-    $q.notify({
-      message: `New path: ${currentPath.value}`,
-    });
+    // $q.notify({
+    //   message: `New path: ${currentPath.value}`,
+    // });
     console.log(newVal);
   }
 );
+
+const router = useRouter();
+const pushToMainPage = () => {
+  router.push("/");
+};
+
+const pushToAboutPage = () => {
+  router.push("/about");
+};
 </script>
 
 <style scoped>
