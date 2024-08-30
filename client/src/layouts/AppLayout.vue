@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-layout view="lHr LpR lFf" container style="height: 100vh">
-      <q-header reveal elevated bordered class="header">
+      <q-header reveal elevated bordered class="bg-black">
         <div class="news row q-gutter-sm">
           <div class="col q-mt-md" align="center">
             <span class="q-mr-md"
@@ -11,7 +11,7 @@
           </div>
           <q-btn flat icon="close" dense @click="onClick" />
         </div>
-        <q-toolbar class="bg-black text-white header">
+        <q-toolbar class="bg-black text-white">
           <div class="container row">
             <img class="icon" src="../assets/header/Symbol.png" alt="" />
             <section class="name col">
@@ -53,8 +53,17 @@
           </div>
         </q-toolbar>
       </q-header>
-      <q-page-container>
-        <q-page class="body">
+      <q-drawer
+        side="left"
+        v-model="drawerLeft"
+        bordered
+        :width="200"
+        :breakpoint="500"
+        content-class="bg-grey-3"
+      >
+      </q-drawer>
+      <q-page-container class="body">
+        <q-page>
           <router-view />
         </q-page>
       </q-page-container>
