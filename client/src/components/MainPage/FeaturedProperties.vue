@@ -128,10 +128,6 @@ const featuredProperties = ref([
 </script>
 
 <style scoped>
-.propertiesIcon {
-  height: 30px;
-}
-
 .button {
   border: solid #262626 1px;
   padding: 7px;
