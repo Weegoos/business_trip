@@ -9,7 +9,14 @@
             >
             <q-btn no-caps flat label="Learn More" @click="learnMore" dense />
           </div>
-          <q-btn flat icon="close" dense @click="onClick" />
+          <q-btn
+            flat
+            icon="close"
+            dense
+            @click="onClick"
+            fab
+            style="height: 30px"
+          />
         </div>
         <q-toolbar class="bg-black text-white">
           <div class="container row">
