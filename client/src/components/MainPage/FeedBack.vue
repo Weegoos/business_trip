@@ -48,6 +48,17 @@
           </div>
         </q-card>
       </div>
+      <q-separator spaced inset dark style="width: 100%" />
+      <q-card class="my-card row">
+        <q-card-section class="col">
+          <span class="pages">01</span
+          ><span class="pages" style="color: #999999"> of 60</span>
+        </q-card-section>
+        <q-card-actions class="col" align="right">
+          <q-btn flat fab-mini icon="keyboard_arrow_left" />
+          <q-btn flat fab-mini icon="keyboard_arrow_right" />
+        </q-card-actions>
+      </q-card>
     </section>
   </div>
 </template>
@@ -95,5 +106,9 @@ const feedbackArray = ref([
 
 .feedbackAuthorInfo {
   display: block;
+}
+
+.pages {
+  font-size: 18px;
 }
 </style>
