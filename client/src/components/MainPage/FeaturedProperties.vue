@@ -34,6 +34,30 @@
           <span class="sectionHeadline">{{ items.name }}</span>
           <span class="description">{{ items.description }}</span>
         </q-card-section>
+        <q-card-section class="contentSection">
+          <q-chip clickable class="chip">
+            <template v-slot="">
+              <img class="chipIcon" :src="bedroom" alt="" />
+              <span class="chipText">{{ items.bedroom }}</span>
+            </template>
+          </q-chip>
+          <q-chip clickable class="chip">
+            <template v-slot="">
+              <img class="chipIcon" :src="bathroom" alt="" />
+              <span class="chipText">{{ items.bathroom }}</span>
+            </template>
+          </q-chip>
+          <q-chip clickable class="chip">
+            <template v-slot="">
+              <img
+                class="chipIcon"
+                src="../../assets/indexPage/type.png"
+                alt=""
+              />
+              <span class="chipText">{{ items.type }}</span>
+            </template>
+          </q-chip>
+        </q-card-section>
       </q-card>
     </div>
   </div>
@@ -44,25 +68,36 @@ import { ref } from "vue";
 import villa from "../../assets/indexPage/villa.png";
 import metropolitan from "../../assets/indexPage/metropolitan.png";
 import cottage from "../../assets/indexPage/cottage.png";
-
+import bathroom from "../../assets/indexPage/bathroom.png";
+import bedroom from "../../assets/indexPage/bedroom.png";
+// import bedroom from "../../assets/indexPage/bedroom.png";
 const featuredProperties = ref([
   {
     icon: villa,
     name: "Seaside Serenity Villa",
     description:
       "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood",
+    bedroom: "4-Bedroom",
+    bathroom: "3-Bathroom",
+    type: "Villa",
   },
   {
     icon: metropolitan,
     name: "Metropolitan Haven",
     description:
       "A chic and fully-furnished 2-bedroom apartment with panoramic city views..",
+    bedroom: "2-Bedroom",
+    bathroom: "2-Bathroom",
+    type: "Villa",
   },
   {
     icon: cottage,
     name: "Rustic Retreat Cottage",
     description:
       "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community..",
+    bedroom: "3-Bedroom",
+    bathroom: "3-Bathroom",
+    type: "Villa",
   },
 ]);
 </script>
@@ -95,5 +130,22 @@ const featuredProperties = ref([
   display: block;
   color: #999999;
   font-size: 16px;
+}
+
+.chip {
+  background-color: #1a1a1a;
+  border: solid #262626 1px;
+  color: white;
+  padding: 15px;
+  align-items: center;
+}
+
+.chipIcon {
+  height: 18px;
+  margin-right: 10px;
+}
+
+.chipText {
+  margin-top: 3px;
 }
 </style>
