@@ -1,0 +1,14 @@
+services:
+  client:
+    build:
+      context: ./client
+    volumes:
+      - ./client:/client
+    ports:
+      # - "80:9000"
+      - "9000:9000"
+    env_file:
+      - .env
+    networks:
+      - mynetwork
+    command: bash -c "npm config set strict-ssl false && npm cache clean --force && npm install && npm run dev"
