@@ -21,7 +21,7 @@
         @click="onClick"
       />
     </div>
-    <div class="q-mt-lg row q-gutter-md">
+    <div class="q-my-lg row q-gutter-md">
       <q-card
         class="featuredCard col"
         v-for="(items, id) in featuredProperties"
@@ -34,7 +34,7 @@
           <span class="sectionHeadline">{{ items.name }}</span>
           <span class="description">{{ items.description }}</span>
         </q-card-section>
-        <q-card-section class="contentSection">
+        <q-card-section class="contentSection" align="center">
           <q-chip clickable class="chip">
             <template v-slot="">
               <img class="chipIcon" :src="bedroom" alt="" />
@@ -58,8 +58,33 @@
             </template>
           </q-chip>
         </q-card-section>
+        <div class="row">
+          <q-card-section class="col">
+            <span class="price" style="color: #999999">Price</span>
+            <span class="price" style="font-size: 24px">$550.000</span>
+          </q-card-section>
+          <q-card-actions align="right" class="col">
+            <q-btn
+              class="moreDetailsButton"
+              flat
+              no-caps
+              label="View Property Details"
+            />
+          </q-card-actions>
+        </div>
       </q-card>
     </div>
+    <q-separator spaced inset dark style="width: 100%" />
+    <q-card class="featuredCardActions row">
+      <q-card-section class="col">
+        <span class="pages">01</span
+        ><span class="pages" style="color: #999999"> of 60</span>
+      </q-card-section>
+      <q-card-actions class="col" align="right">
+        <q-btn flat fab-mini icon="keyboard_arrow_left" />
+        <q-btn flat fab-mini icon="keyboard_arrow_right" />
+      </q-card-actions>
+    </q-card>
   </div>
 </template>
 
@@ -117,6 +142,10 @@ const featuredProperties = ref([
   border: solid #262626 1px;
 }
 
+.featuredCardActions {
+  background-color: transparent;
+}
+
 .contentSection {
   margin-left: 50px;
 }
@@ -147,5 +176,20 @@ const featuredProperties = ref([
 
 .chipText {
   margin-top: 3px;
+}
+
+.moreDetailsButton {
+  background-color: #703bf7;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.price {
+  line-height: 1.2;
+  display: block;
+}
+
+.pages {
+  font-size: 18px;
 }
 </style>
