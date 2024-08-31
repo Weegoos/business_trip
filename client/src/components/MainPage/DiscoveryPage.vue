@@ -52,13 +52,18 @@
           :key="id"
         >
           <q-card class="statsWrapper">
+            <div class="row">
+              <div class="col" align="right">
+                <q-btn flat icon="keyboard_arrow_right" @click="onClick" />
+              </div>
+            </div>
             <div align="center">
               <q-avatar
                 size="50px"
                 font-size="25px"
                 color="black"
                 text-color="white"
-                :icon="items.icon"
+                icon="code"
                 class="q-mb-sm"
               />
               <p>{{ items.name }}</p>
@@ -73,7 +78,6 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import Container1 from "../../assets/indexPage/Image.png";
 const button = ref([
   {
     name: "Learn More",
@@ -108,7 +112,7 @@ const stats = ref([
 
 const links = ref([
   {
-    icon: Container1,
+    icon: "",
     name: "Find Your Dream Home",
   },
   {

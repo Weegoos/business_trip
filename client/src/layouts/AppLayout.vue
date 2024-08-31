@@ -15,7 +15,7 @@
           <div class="container row">
             <img class="icon" src="../assets/header/Symbol.png" alt="" />
             <section class="name col">
-              <p class="text-h6 q-mt-md">Estatiin</p>
+              <p class="text-h6 q-mt-md">Estatein</p>
             </section>
             <section class="col buttonSection" align="center">
               <q-btn
