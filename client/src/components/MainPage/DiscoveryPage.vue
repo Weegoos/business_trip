@@ -3,10 +3,8 @@
     <section class="row">
       <div class="col q-pa-xl">
         <div>
-          <p class="text-h3 text-bold headline">
-            Discover Your Dream Property with Estatein
-          </p>
-          <p class="description">
+          <p class="textHeadline">Discover Your Dream Property with Estatein</p>
+          <p class="textDescription">
             Your journey to finding the perfect property begins here. Explore
             our listings to find the home that matches your dreams.
           </p>
@@ -54,7 +52,14 @@
           <q-card class="statsWrapper">
             <div class="row">
               <div class="col" align="right">
-                <q-btn flat icon="keyboard_arrow_right" @click="onClick" />
+                <q-btn
+                  fab
+                  style="transform: rotate(-45deg)"
+                  flat
+                  icon="keyboard_arrow_right"
+                  @click="onClick"
+                  dense
+                />
               </div>
             </div>
             <div align="center">
@@ -128,14 +133,6 @@ const links = ref([
 </script>
 
 <style scoped>
-.headline {
-  width: 80%;
-}
-
-.description {
-  color: #999999;
-}
-
 .button {
   padding: 10px;
   width: 150px;
