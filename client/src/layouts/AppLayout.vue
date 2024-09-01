@@ -3,11 +3,24 @@
     <q-layout view="hHr LpR lFf" container style="height: 100vh">
       <q-header reveal elevated bordered style="background-color: #1a1a1a">
         <div class="news row q-gutter-sm">
-          <div class="col q-mt-md" align="center">
+          <div
+            class="col q-mt-md"
+            align="center"
+            :class="
+              $q.screen.width < mobileVersion ? 'newsMobile' : 'newsDesktop'
+            "
+          >
             <span class="q-mr-md"
               >Discover Your Dream Property with Estatein</span
             >
-            <q-btn no-caps flat label="Learn More" @click="learnMore" dense />
+            <q-btn
+              v-show="isShowLearnMoreButton"
+              no-caps
+              flat
+              label="Learn More"
+              @click="learnMore"
+              dense
+            />
           </div>
           <q-btn flat icon="close" dense @click="onClick" fab-mini />
         </div>
@@ -206,10 +219,12 @@ const navigation = (route) => {
 };
 
 const isMobile = ref("");
+const isShowLearnMoreButton = ref("");
 const width = ref(window.innerWidth);
 const updateWidth = () => {
   width.value = window.innerWidth;
   isMobile.value = width.value < mobileWidth;
+  isShowLearnMoreButton.value = width.value > mobileVersion;
 };
 
 updateWidth();
@@ -264,5 +279,11 @@ onUnmounted(() => {
 
 .q-drawer.drawer {
   background-color: #1a1a1a !important;
+}
+
+/* mobile version style */
+.newsMobile {
+  font-size: 14px;
+  margin-top: 20px;
 }
 </style>

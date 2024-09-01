@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section :class="$q.screen.width < mobileWidth ? 'col' : 'row'">
+    <section :class="$q.screen.width < mobileWidth ? 'col' : 'row '">
       <div class="col q-pa-xl">
         <div>
           <p class="textHeadline">Discover Your Dream Property with Estatein</p>
@@ -10,7 +10,7 @@
           </p>
         </div>
         <div class="q-my-xl">
-          <section class="row q-gutter-md">
+          <section class="q-gutter-md">
             <div v-for="(items, id) in button" :key="id">
               <q-btn
                 no-caps
@@ -18,12 +18,20 @@
                 :id="items.style"
                 :label="items.name"
                 @click="navigation(items.link)"
+                :class="
+                  $q.screen.width < mobileVersion
+                    ? 'mobileButtonStyle'
+                    : 'desktopButtonStyle'
+                "
               />
             </div>
           </section>
         </div>
         <div class="statsContainer">
-          <section class="row q-gutter-md">
+          <section
+            class="q-gutter-md"
+            :class="$q.screen.width < mobileVersion ? 'col' : 'row'"
+          >
             <div class="col" v-for="(items, id) in stats" :key="id">
               <q-card class="statsWrapper">
                 <p class="text-h6 text-bold">{{ items.number }}+</p>
@@ -43,7 +51,7 @@
       </div>
     </section>
     <section>
-      <div class="row">
+      <div :class="$q.screen.width < mobileVersion ? 'col' : 'row'">
         <section
           class="col bg-black q-pa-sm"
           v-for="(items, id) in links"
@@ -86,6 +94,8 @@ import { useRouter } from "vue-router";
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
 const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
+
 const button = ref([
   {
     name: "Learn More",
@@ -154,5 +164,10 @@ const links = ref([
 .statsWrapper {
   background-color: #262626;
   padding: 20px;
+}
+
+/* mobile */
+.mobileButtonStyle {
+  width: 100%;
 }
 </style>
