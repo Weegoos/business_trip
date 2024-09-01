@@ -79,6 +79,30 @@
           <FooterPage />
         </q-page>
       </q-page-container>
+      <q-footer reveal elevated bordered class="footer q-pa-sm">
+        <q-toolbar class="footer text-white">
+          <section class="row" style="width: 100%">
+            <div class="col">
+              <div class="row q-gutter-md q-mt-sm">
+                <p class="footerContent">
+                  @2023 Estatein. All Rights Reserved.
+                </p>
+                <p class="footerContent">Terms & Conditions</p>
+              </div>
+            </div>
+            <div class="col q-mt-md" align="right">
+              <q-avatar size="40px" font-size="32px" icon="fab fa-facebook-f" />
+              <q-avatar
+                size="40px"
+                font-size="32px"
+                icon="fab fa-telegram-plane"
+              />
+              <q-avatar size="40px" font-size="32px" icon="fab fa-twitter" />
+              <q-avatar size="40px" font-size="32px" icon="fab fa-instagram" />
+            </div>
+          </section>
+        </q-toolbar>
+      </q-footer>
     </q-layout>
   </div>
 </template>
@@ -163,5 +187,13 @@ const pushToAboutPage = () => {
   margin-top: 20px;
   margin-left: 15px;
   margin-right: 10px;
+}
+
+.footer {
+  background-color: #1a1a1a;
+}
+
+.footerContent {
+  font-size: 16px;
 }
 </style>
