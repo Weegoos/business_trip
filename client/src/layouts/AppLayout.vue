@@ -83,15 +83,20 @@
         bordered
         :width="200"
         :breakpoint="500"
-        content-class="bg-grey-3"
+        style="background-color: #1a1a1a"
         v-if="$q.screen.width < mobileWidth"
       >
-        <q-list bordered>
-          <q-item clickable v-ripple>
+        <q-list class="text-white q-mt-xl" bordered>
+          <q-item
+            clickable
+            v-ripple
+            v-for="(items, index) in drawerButton"
+            :key="index"
+          >
             <q-item-section avatar>
-              <q-icon color="primary" name="bluetooth" />
+              <q-icon :name="items.icon" />
             </q-item-section>
-            <q-item-section>Icon as avatar</q-item-section>
+            <q-item-section>{{ items.name }}</q-item-section>
           </q-item>
         </q-list>
       </q-drawer>
@@ -134,6 +139,8 @@ import { onMounted, ref, watch } from "vue";
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import FooterPage from "../pages/FooterPage.vue";
+import { setCssVar } from "quasar";
+setCssVar("background", "red");
 const drawer = ref(true);
 const $q = useQuasar();
 import { getCurrentInstance } from "vue";
@@ -163,6 +170,29 @@ const pushToMainPage = () => {
 const pushToAboutPage = () => {
   router.push("/about");
 };
+
+const drawerButton = ref([
+  {
+    name: "Home",
+    icon: "fas fa-home", // Иконка для "Home"
+  },
+  {
+    name: "About us",
+    icon: "fas fa-info-circle", // Иконка для "About us"
+  },
+  {
+    name: "Properties",
+    icon: "fas fa-building", // Иконка для "Properties"
+  },
+  {
+    name: "Services",
+    icon: "fas fa-concierge-bell", // Иконка для "Services"
+  },
+  {
+    name: "Contact Us",
+    icon: "fas fa-envelope", // Иконка для "Contact Us"
+  },
+]);
 </script>
 
 <style scoped>
@@ -202,5 +232,9 @@ const pushToAboutPage = () => {
 
 .footerContent {
   font-size: 16px;
+}
+
+.q-drawer.drawer {
+  background-color: #1a1a1a !important;
 }
 </style>
