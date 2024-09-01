@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-layout view="lHr LpR lFf" container style="height: 100vh">
+    <q-layout view="hHr LpR lFf" container style="height: 100vh">
       <q-header reveal elevated bordered style="background-color: #1a1a1a">
         <div class="news row q-gutter-sm">
           <div class="col q-mt-md" align="center">
@@ -13,11 +13,20 @@
         </div>
         <q-toolbar class="bg-black text-white">
           <div class="container row">
-            <img class="icon" src="../assets/header/Symbol.png" alt="" />
-            <section class="name col">
+            <img
+              class="icon"
+              src="../assets/header/Symbol.png"
+              alt=""
+              @click="drawer = !drawer"
+            />
+            <section class="name col" @click="drawer = !drawer">
               <p class="text-h6 q-mt-md">Estatein</p>
             </section>
-            <section class="col buttonSection" align="center">
+            <section
+              v-if="$q.screen.width > mobileWidth"
+              class="col buttonSection"
+              align="center"
+            >
               <q-btn
                 flat
                 no-caps
@@ -51,7 +60,11 @@
                 :class="currentPath === '/services' ? 'active' : 'unactive'"
               />
             </section>
-            <section class="col buttonSection" align="right">
+            <section
+              v-if="$q.screen.width > mobileWidth"
+              class="col buttonSection"
+              align="right"
+            >
               <q-btn
                 flat
                 no-caps
@@ -66,12 +79,21 @@
       </q-header>
       <q-drawer
         side="left"
-        v-model="drawerLeft"
+        v-model="drawer"
         bordered
         :width="200"
         :breakpoint="500"
         content-class="bg-grey-3"
+        v-if="$q.screen.width < mobileWidth"
       >
+        <q-list bordered>
+          <q-item clickable v-ripple>
+            <q-item-section avatar>
+              <q-icon color="primary" name="bluetooth" />
+            </q-item-section>
+            <q-item-section>Icon as avatar</q-item-section>
+          </q-item>
+        </q-list>
       </q-drawer>
       <q-page-container class="body">
         <q-page class="body">
@@ -108,30 +130,15 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import FooterPage from "../pages/FooterPage.vue";
 const drawer = ref(true);
 const $q = useQuasar();
-const button = ref([
-  {
-    name: "Home",
-    link: "/",
-  },
-  {
-    name: "About us",
-    link: "/about",
-  },
-  {
-    name: "Properties",
-    link: "/properties",
-  },
-  {
-    name: "Services",
-    link: "/services",
-  },
-]);
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
 
 const route = useRoute();
 const currentPath = ref(route.path);
