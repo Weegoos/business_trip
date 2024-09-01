@@ -65,6 +65,24 @@
               />
             </div>
           </div>
+          <div class="properties">
+            <q-btn
+              no-caps
+              flat
+              class="sectionButton"
+              label="Properties"
+              @click="onClick"
+            />
+            <div v-for="(items, id) in properties" :key="id">
+              <q-btn
+                class="button"
+                flat
+                no-caps
+                :label="items.name"
+                @click="onClick"
+              />
+            </div>
+          </div>
         </section>
       </div>
     </section>
@@ -116,6 +134,15 @@ const aboutButton = ref([
   },
   {
     name: "Our Clients",
+  },
+]);
+
+const properties = ref([
+  {
+    name: "Portfolio",
+  },
+  {
+    name: "Categories",
   },
 ]);
 </script>
