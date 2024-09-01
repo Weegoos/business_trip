@@ -85,7 +85,8 @@
         :width="200"
         :breakpoint="500"
         style="background-color: #1a1a1a"
-        v-if="$q.screen.width < mobileWidth"
+        v-show="isMobile"
+        behavior="mobile"
       >
         <q-list class="text-white q-mt-xl" bordered>
           <q-item
@@ -138,7 +139,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, onUnmounted, ref, watch } from "vue";
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import FooterPage from "../pages/FooterPage.vue";
@@ -202,6 +203,23 @@ const drawerButton = ref([
 const navigation = (route) => {
   router.push(route);
 };
+
+const isMobile = ref("");
+const width = ref(window.innerWidth);
+const updateWidth = () => {
+  width.value = window.innerWidth;
+  isMobile.value = width.value < mobileWidth;
+};
+
+updateWidth();
+
+onMounted(() => {
+  window.addEventListener("resize", updateWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateWidth);
+});
 </script>
 
 <style scoped>
