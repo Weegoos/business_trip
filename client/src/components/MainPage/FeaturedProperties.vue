@@ -19,22 +19,26 @@
         class="button"
         label="View All Testimonials"
         @click="onClick"
+        v-show="isMobile"
       />
     </div>
-    <div class="q-my-lg row q-gutter-md">
+    <div
+      class="q-my-lg q-gutter-md"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
       <q-card
         class="featuredCard col"
         v-for="(items, id) in featuredProperties"
         :key="id"
       >
         <q-card-section align="center">
-          <img :src="items.icon" alt="" />
+          <img :src="items.icon" alt="" style="width: 100%" />
         </q-card-section>
         <q-card-section class="contentSection">
           <span class="sectionHeadline">{{ items.name }}</span>
           <span class="description">{{ items.description }}</span>
         </q-card-section>
-        <q-card-section class="contentSection" align="center">
+        <q-card-section class="contentSection">
           <q-chip clickable class="chip">
             <template v-slot="">
               <img class="chipIcon" :src="bedroom" alt="" />
@@ -58,7 +62,7 @@
             </template>
           </q-chip>
         </q-card-section>
-        <div class="row">
+        <div :class="$q.screen.width < mobileVersion ? 'col' : 'row'">
           <q-card-section class="col">
             <span class="price" style="color: #999999">Price</span>
             <span class="price" style="font-size: 24px">$550.000</span>
@@ -89,13 +93,19 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import villa from "../../assets/indexPage/villa.png";
 import metropolitan from "../../assets/indexPage/metropolitan.png";
 import cottage from "../../assets/indexPage/cottage.png";
 import bathroom from "../../assets/indexPage/bathroom.png";
 import bedroom from "../../assets/indexPage/bedroom.png";
 // import bedroom from "../../assets/indexPage/bedroom.png";
+
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
+
 const featuredProperties = ref([
   {
     icon: villa,
@@ -125,6 +135,23 @@ const featuredProperties = ref([
     type: "Villa",
   },
 ]);
+
+const isMobile = ref("");
+const width = ref(window.innerWidth);
+const updateWidth = () => {
+  width.value = window.innerWidth;
+  isMobile.value < mobileVersion;
+};
+
+updateWidth();
+
+onMounted(() => {
+  window.addEventListener("resize", updateWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateWidth);
+});
 </script>
 
 <style scoped>
