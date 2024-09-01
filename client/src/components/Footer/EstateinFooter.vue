@@ -28,7 +28,7 @@
         </q-input>
       </div>
       <div class="col">
-        <section class="row q-gutter-lg">
+        <section class="row q-gutter-xl">
           <div class="home">
             <q-btn
               no-caps
@@ -92,6 +92,24 @@
               @click="onClick"
             />
             <div v-for="(items, id) in servicesButton" :key="id">
+              <q-btn
+                class="button"
+                flat
+                no-caps
+                :label="items.name"
+                @click="onClick"
+              />
+            </div>
+          </div>
+          <div class="contact">
+            <q-btn
+              no-caps
+              flat
+              class="sectionButton"
+              label="Contact us"
+              @click="onClick"
+            />
+            <div v-for="(items, id) in contactButton" :key="id">
               <q-btn
                 class="button"
                 flat
@@ -179,6 +197,15 @@ const servicesButton = ref([
   },
   {
     name: "Property Management",
+  },
+]);
+
+const contactButton = ref([
+  {
+    name: "Contact Form",
+  },
+  {
+    name: "Our Offices",
   },
 ]);
 </script>
