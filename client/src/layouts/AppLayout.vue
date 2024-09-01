@@ -94,6 +94,7 @@
             v-for="(items, index) in drawerButton"
             :key="index"
             @click="navigation(items.link)"
+            :class="currentPath === items.link ? 'active' : ''"
           >
             <q-item-section avatar>
               <q-icon :name="items.icon" />
