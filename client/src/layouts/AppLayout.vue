@@ -76,6 +76,7 @@
       <q-page-container class="body">
         <q-page class="body">
           <router-view />
+          <FooterPage />
         </q-page>
       </q-page-container>
     </q-layout>
@@ -86,6 +87,7 @@
 import { ref, watch } from "vue";
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
+import FooterPage from "../pages/FooterPage.vue";
 const drawer = ref(true);
 const $q = useQuasar();
 const button = ref([
