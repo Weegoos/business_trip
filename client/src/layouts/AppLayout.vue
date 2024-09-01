@@ -100,6 +100,7 @@
         style="background-color: #1a1a1a"
         v-show="isMobile"
         :behavior="$q.screen.width < 750 ? 'mobile' : 'desktop'"
+        v-if="$q.screen.width < mobileWidth"
       >
         <q-list class="text-white q-mt-xl" bordered>
           <q-item
