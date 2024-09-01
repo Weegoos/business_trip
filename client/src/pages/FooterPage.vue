@@ -1,9 +1,11 @@
 <template>
-  <div class="text-white">Footer</div>
+  <div class="text-white">
+    <ExploreProperties />
+  </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import ExploreProperties from "../components/Footer/ExploreProperties.vue";
 </script>
 
 <style></style>
