@@ -1,6 +1,6 @@
 <template>
   <div class="text-white">
-    <section class="row container">
+    <section class="row container q-gutter-lg">
       <div class="col-4">
         <section class="row q-gutter-sm">
           <div class="q-mt-md">
@@ -27,6 +27,46 @@
           </template>
         </q-input>
       </div>
+      <div class="col">
+        <section class="row q-gutter-md">
+          <div class="home">
+            <q-btn
+              no-caps
+              flat
+              class="sectionButton"
+              label="Home"
+              @click="onClick"
+            />
+            <div v-for="(items, id) in homeButton" :key="id">
+              <q-btn
+                class="button"
+                flat
+                no-caps
+                :label="items.name"
+                @click="onClick"
+              />
+            </div>
+          </div>
+          <div class="home">
+            <q-btn
+              no-caps
+              flat
+              class="sectionButton"
+              label="About us"
+              @click="onClick"
+            />
+            <div v-for="(items, id) in aboutButton" :key="id">
+              <q-btn
+                class="button"
+                flat
+                no-caps
+                :label="items.name"
+                @click="onClick"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
     </section>
   </div>
 </template>
@@ -42,6 +82,42 @@ const sendMessage = () => {
     message: "Clicked",
   });
 };
+
+const homeButton = ref([
+  {
+    name: "Hero Section",
+  },
+  {
+    name: "Features",
+  },
+  {
+    name: "Properties",
+  },
+  {
+    name: "Testimonials",
+  },
+  {
+    name: "FAQs",
+  },
+]);
+
+const aboutButton = ref([
+  {
+    name: "Our Story",
+  },
+  {
+    name: "Our Works",
+  },
+  {
+    name: "How It Works",
+  },
+  {
+    name: "Our Team",
+  },
+  {
+    name: "Our Clients",
+  },
+]);
 </script>
 
 <style scoped>
@@ -50,5 +126,14 @@ const sendMessage = () => {
 }
 .icon {
   height: 10px;
+}
+
+.button {
+  font-size: 16px;
+}
+
+.sectionButton {
+  color: #999999;
+  font-size: 16px;
 }
 </style>
