@@ -86,7 +86,7 @@
         :breakpoint="500"
         style="background-color: #1a1a1a"
         v-show="isMobile"
-        behavior="mobile"
+        :behavior="$q.screen.width < 750 ? 'mobile' : 'desktop'"
       >
         <q-list class="text-white q-mt-xl" bordered>
           <q-item
@@ -150,6 +150,7 @@ const $q = useQuasar();
 import { getCurrentInstance } from "vue";
 const { proxy } = getCurrentInstance();
 const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 
 const route = useRoute();
 const currentPath = ref(route.path);

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="row">
+    <section :class="$q.screen.width < mobileWidth ? 'col' : 'row'">
       <div class="col q-pa-xl">
         <div>
           <p class="textHeadline">Discover Your Dream Property with Estatein</p>
@@ -83,6 +83,9 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
 const button = ref([
   {
     name: "Learn More",
