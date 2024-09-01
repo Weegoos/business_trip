@@ -18,9 +18,10 @@
               src="../assets/header/Symbol.png"
               alt=""
               @click="drawer = !drawer"
+              style="cursor: pointer"
             />
             <section class="name col" @click="drawer = !drawer">
-              <p class="text-h6 q-mt-md">Estatein</p>
+              <p class="text-h6 q-mt-md" style="cursor: pointer">Estatein</p>
             </section>
             <section
               v-if="$q.screen.width > mobileWidth"
@@ -92,6 +93,7 @@
             v-ripple
             v-for="(items, index) in drawerButton"
             :key="index"
+            @click="navigation(items.link)"
           >
             <q-item-section avatar>
               <q-icon :name="items.icon" />
@@ -174,25 +176,31 @@ const pushToAboutPage = () => {
 const drawerButton = ref([
   {
     name: "Home",
-    icon: "fas fa-home", // Иконка для "Home"
+    icon: "fas fa-home",
+    link: "/",
   },
   {
     name: "About us",
-    icon: "fas fa-info-circle", // Иконка для "About us"
+    icon: "fas fa-info-circle",
+    link: "/about",
   },
   {
     name: "Properties",
-    icon: "fas fa-building", // Иконка для "Properties"
+    icon: "fas fa-building",
   },
   {
     name: "Services",
-    icon: "fas fa-concierge-bell", // Иконка для "Services"
+    icon: "fas fa-concierge-bell",
   },
   {
     name: "Contact Us",
-    icon: "fas fa-envelope", // Иконка для "Contact Us"
+    icon: "fas fa-envelope",
   },
 ]);
+
+const navigation = (route) => {
+  router.push(route);
+};
 </script>
 
 <style scoped>
