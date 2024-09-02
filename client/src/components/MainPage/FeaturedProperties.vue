@@ -79,7 +79,7 @@
       </q-card>
     </div>
     <q-separator spaced inset dark style="width: 100%" />
-    <q-card class="featuredCardActions row">
+    <q-card class="featuredCardActions row" v-show="isShowPagesSection">
       <q-card-section class="col">
         <span class="pages">01</span
         ><span class="pages" style="color: #999999"> of 60</span>
@@ -137,10 +137,12 @@ const featuredProperties = ref([
 ]);
 
 const isMobile = ref("");
+const isShowPagesSection = ref("");
 const width = ref(window.innerWidth);
 const updateWidth = () => {
   width.value = window.innerWidth;
   isMobile.value < mobileVersion;
+  isShowPagesSection.value < mobileVersion;
 };
 
 updateWidth();
