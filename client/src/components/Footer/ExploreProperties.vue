@@ -2,7 +2,10 @@
   <div class="text-white container">
     <div class="q-mt-lg q-ml-lg">
       <p class="textHeadline">Start Your Real Estate Journey Today</p>
-      <section class="row q-gutter-md">
+      <section
+        class="q-gutter-md"
+        :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+      >
         <div class="col-8">
           <p class="textDescription">
             Your dream property is just a click away. Whether you're looking for
@@ -16,7 +19,7 @@
         <div class="col" align="center">
           <q-btn
             no-caps
-            class="button"
+            :class="$q.screen.width < mobileVersion ? 'buttonMobile' : 'button'"
             label="Explore Properties"
             @click="onClick"
           />
@@ -43,5 +46,13 @@ const mobileVersion = proxy.$mobileVersion;
   color: #ffffff;
   background-color: #703bf7;
   padding: 15px;
+}
+
+/* mobile Version */
+.buttonMobile {
+  color: #ffffff;
+  background-color: #703bf7;
+  padding: 15px;
+  width: 100%;
 }
 </style>
