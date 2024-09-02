@@ -18,6 +18,7 @@
         class="button"
         label="View All Testimonials"
         @click="onClick"
+        v-show="isShowButton"
       />
     </div>
     <section>
@@ -65,6 +66,10 @@
 
 <script setup>
 import { ref } from "vue";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 
 const ratingModel = ref(5);
 
@@ -91,6 +96,13 @@ const feedbackArray = ref([
     location: "USA, Nevada",
   },
 ]);
+
+const isShowButton = ref("");
+const width = ref(window.innerWidth);
+const updateWidth = () => {
+  width.value = window.innerWidth;
+  isShowButton.value < mobileVersion;
+};
 </script>
 
 <style scoped>
