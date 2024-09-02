@@ -19,10 +19,14 @@
         class="button"
         label="View All Testimonials"
         @click="onClick"
+        v-if="$q.screen.width > mobileVersion"
       />
     </div>
 
-    <div class="q-my-lg row q-gutter-md">
+    <div
+      class="q-my-lg q-gutter-md"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
       <q-card
         class="my-card q-pa-lg col"
         v-for="(items, id) in faqArray"
@@ -38,13 +42,29 @@
       </q-card>
     </div>
     <q-separator spaced inset dark style="width: 100%" />
-    <q-card class="my-card row">
+    <q-card class="my-card row" v-if="$q.screen.width > mobileVersion">
       <q-card-section class="col">
         <span class="pages">01</span
         ><span class="pages" style="color: #999999"> of 60</span>
       </q-card-section>
       <q-card-actions class="col" align="right">
         <q-btn flat fab-mini icon="keyboard_arrow_left" />
+        <q-btn flat fab-mini icon="keyboard_arrow_right" />
+      </q-card-actions>
+    </q-card>
+    <q-card class="my-card col" v-else>
+      <q-card-section>
+        <q-btn
+          no-caps
+          class="button"
+          label="View All Testimonials"
+          @click="onClick"
+        />
+      </q-card-section>
+      <q-card-actions class="col" align="left">
+        <q-btn flat fab-mini icon="keyboard_arrow_left" />
+        <span class="pages">01</span
+        ><span class="pages" style="color: #999999"> of 60</span>
         <q-btn flat fab-mini icon="keyboard_arrow_right" />
       </q-card-actions>
     </q-card>
