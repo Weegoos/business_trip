@@ -26,8 +26,11 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 </script>
 
 <style scoped>
