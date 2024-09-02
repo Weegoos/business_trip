@@ -18,11 +18,14 @@
         class="button"
         label="View All Testimonials"
         @click="onClick"
-        v-show="isShowButton"
+        v-if="$q.screen.width > mobileVersion"
       />
     </div>
     <section>
-      <div class="row q-gutter-md q-py-xl">
+      <div
+        class="q-gutter-md q-py-xl"
+        :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+      >
         <q-card
           class="my-card col q-pa-xl"
           v-for="(items, id) in feedbackArray"
@@ -37,7 +40,9 @@
           <p class="q-mt-md text-h6 text-bold">{{ items.feedback }}</p>
           <p>{{ items.description }}</p>
           <div class="row q-mt-lg">
-            <section class="col-2">
+            <section
+              :class="$q.screen.width < mobileVersion ? 'col-4' : 'col-2'"
+            >
               <q-avatar>
                 <img :src="`https://cdn.quasar.dev/img/avatar${id + 1}.jpg`" />
               </q-avatar>
@@ -65,8 +70,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { getCurrentInstance } from "vue";
+import { getCurrentInstance, ref } from "vue";
 const { proxy } = getCurrentInstance();
 const mobileWidth = proxy.$mobileWidth;
 const mobileVersion = proxy.$mobileVersion;
@@ -96,13 +100,6 @@ const feedbackArray = ref([
     location: "USA, Nevada",
   },
 ]);
-
-const isShowButton = ref("");
-const width = ref(window.innerWidth);
-const updateWidth = () => {
-  width.value = window.innerWidth;
-  isShowButton.value < mobileVersion;
-};
 </script>
 
 <style scoped>
