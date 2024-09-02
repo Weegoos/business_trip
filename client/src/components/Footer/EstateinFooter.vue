@@ -1,8 +1,11 @@
 <template>
   <div class="text-white">
-    <section class="row container q-gutter-lg">
+    <section
+      class="container q-gutter-lg"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
       <div class="col-4">
-        <section class="row q-gutter-sm">
+        <section class="q-gutter-sm row">
           <div class="q-mt-md">
             <img icon="icon" src="../../assets/header/Symbol.png" alt="" />
           </div>
@@ -128,6 +131,10 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref } from "vue";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 
 const email = ref("");
 const $q = useQuasar();
