@@ -15,6 +15,20 @@
           our reach, forged valuable partnerships, and gained the trust of
           countless clients.
         </p>
+
+        <div class="statsContainer">
+          <section
+            class="q-gutter-md"
+            :class="$q.screen.width < mobileVersion ? 'col' : 'row'"
+          >
+            <div class="col" v-for="(items, id) in stats" :key="id">
+              <q-card class="statsWrapper">
+                <p class="text-h6 text-bold">{{ items.number }}+</p>
+                <p class="text-body1">{{ items.description }}</p>
+              </q-card>
+            </div>
+          </section>
+        </div>
       </div>
       <div class="col">
         <img src="../../assets/about/aboutImage.png" alt="" />
@@ -23,6 +37,28 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from "vue";
 
-<style></style>
+const stats = ref([
+  {
+    number: 200,
+    description: "Happy Customers",
+  },
+  {
+    number: 1000,
+    description: "Properties For Clients",
+  },
+  {
+    number: 16,
+    description: "Years of Experience",
+  },
+]);
+</script>
+
+<style scoped>
+.statsWrapper {
+  background-color: #262626;
+  padding: 20px;
+}
+</style>
