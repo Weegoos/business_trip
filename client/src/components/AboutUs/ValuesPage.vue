@@ -48,6 +48,37 @@
                 </p>
               </div>
             </div>
+            <div class="row q-gutter-md q-mt-md">
+              <div class="col">
+                <q-btn
+                  fab
+                  flat
+                  icon="group"
+                  style="border: #703bf7 1px solid; color: #a685fa"
+                  @click="onClick"
+                />
+                <span class="text-h6 text-bold q-ml-md">Client-Centric</span>
+                <p class="text-body1 q-mt-sm">
+                  Your dreams and needs are at the center of our universe. We
+                  listen, understand.
+                </p>
+              </div>
+
+              <div class="col">
+                <q-btn
+                  fab
+                  flat
+                  icon="group"
+                  style="border: #703bf7 1px solid; color: #a685fa"
+                  @click="onClick"
+                />
+                <span class="text-h6 text-bold q-ml-md">Our Commitment</span>
+                <p class="text-body1 q-mt-sm">
+                  We are dedicated to providing you with the highest level of
+                  service, professionalism, and support.
+                </p>
+              </div>
+            </div>
           </q-card-section>
         </q-card>
       </div>
