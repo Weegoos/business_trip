@@ -1,9 +1,13 @@
 <template>
-  <div class="text-white">About</div>
+  <div class="text-white">
+    <section>
+      <JourneyPage />
+    </section>
+  </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import JourneyPage from "../components/AboutUs/JourneyPage.vue";
 </script>
 
 <style></style>

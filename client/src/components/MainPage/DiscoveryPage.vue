@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section :class="$q.screen.width < mobileWidth ? 'col' : 'row '">
+    <section :class="$q.screen.width < mobileWidth ? 'col' : 'row'">
       <div class="col q-pa-xl">
         <div>
           <p class="textHeadline">Discover Your Dream Property with Estatein</p>
