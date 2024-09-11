@@ -22,6 +22,17 @@
         </q-card>
       </div>
     </section>
+    <section class="q-mt-md row q-gutter-md">
+      <div v-for="(items, index) in navigationStep" :key="index" class="col">
+        <q-card class="card col">
+          <q-card-section>
+            <div class="text-body1">Step {{ index + 4 }}</div>
+            <div class="text-h5 text-bold">{{ items.name }}</div>
+            <div class="text text-body1 q-mt-md">{{ items.description }}</div>
+          </q-card-section>
+        </q-card>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -56,5 +67,6 @@ const navigationStep = ref([
 
 .text {
   color: #999999;
+  font-size: 16px;
 }
 </style>
