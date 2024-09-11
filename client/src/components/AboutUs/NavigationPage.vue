@@ -12,11 +12,12 @@
       it all works.
     </p>
     <section class="q-mt-md row q-gutter-md">
-      <div v-for="(items, index) in 3" :key="index" class="col">
+      <div v-for="(items, index) in navigationStep" :key="index" class="col">
         <q-card class="card col">
           <q-card-section>
-            <div class="text-h6">Step {{ index + 1 }}</div>
-            <div>{{ items.name }}</div>
+            <div class="text-body1">Step {{ index + 1 }}</div>
+            <div class="text-h5 text-bold">{{ items.name }}</div>
+            <div class="text text-body1 q-mt-md">{{ items.description }}</div>
           </q-card-section>
         </q-card>
       </div>
@@ -30,9 +31,17 @@ import { ref } from "vue";
 const navigationStep = ref([
   {
     name: "Discover a World of Possibilities",
+    description:
+      "Your journey begins with exploring our carefully curated property listings. Use our intuitive search tools to filter properties based on your preferences, including location, type, size, and budget.",
   },
   {
     name: "Narrowing Down Your Choices",
+    description: `Once you've found properties that catch your eye, save them to your account or make a shortlist. This allows you to compare and revisit your favorites as you make your decision.`,
+  },
+  {
+    name: "Personalized Guidance",
+    description:
+      "Have questions about a property or need more information? Our dedicated team of real estate experts is just a call or message away.",
   },
 ]);
 </script>
@@ -43,5 +52,9 @@ const navigationStep = ref([
   border: solid 1px;
   border-color: #703bf7;
   border-radius: 7px;
+}
+
+.text {
+  color: #999999;
 }
 </style>
