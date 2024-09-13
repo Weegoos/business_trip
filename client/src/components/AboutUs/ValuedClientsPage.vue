@@ -30,6 +30,17 @@
               />
             </section>
           </div>
+
+          <div class="row q-gutter-md q-mt-md">
+            <section class="col">
+              <p style="color: #999999" class="text-body1">Domain</p>
+              <span class="text-body1">{{ item.domain }}</span>
+            </section>
+            <section class="col">
+              <p style="color: #999999" class="text-body1">Category</p>
+              <span class="text-body1">{{ item.category }}</span>
+            </section>
+          </div>
         </q-card-section>
         <q-card-section>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -47,10 +58,14 @@ const client = ref([
   {
     coorporation: "ABC Corporation",
     year: 2019,
+    domain: "Commercial Real Estate",
+    category: "Luxury Home Development",
   },
   {
     coorporation: "GreenTech Enterprises",
     year: 2018,
+    domain: "Commercial Real Estate",
+    category: "Retail Space",
   },
 ]);
 
