@@ -36,15 +36,19 @@ import { ref } from "vue";
 const teamArray = ref([
   {
     name: "Max Mitchell",
+    post: "Founder",
   },
   {
     name: "Sarah Johnson",
+    post: "Chief Real Estate Officer",
   },
   {
     name: "David Brown",
+    post: "Head of Property Management",
   },
   {
     name: "Michael Turner",
+    post: "Legal Counsel",
   },
 ]);
 </script>
