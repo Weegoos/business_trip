@@ -15,10 +15,14 @@
       <div v-for="(items, index) in teamArray" :key="index" class="col">
         <q-card class="card q-mt-md">
           <q-card-section align="center">
-            <img
+            <q-img
               style="width: 50%; border-radius: 5px"
               :src="`https://cdn.quasar.dev/img/avatar${index + 1}.jpg`"
-            />
+            >
+              <div class="bg-transparent absolute-bottom text-body1">
+                <i class="fab fa-twitter icon"></i>
+              </div>
+            </q-img>
           </q-card-section>
         </q-card>
       </div>
@@ -39,6 +43,9 @@ const teamArray = ref([
   {
     name: "David Brown",
   },
+  {
+    name: "Michael Turner",
+  },
 ]);
 </script>
 
@@ -47,5 +54,11 @@ const teamArray = ref([
   background-color: #141414;
   border: solid #262626 1px;
   border-radius: 7px;
+}
+
+.icon {
+  background-color: #703bf7;
+  border-radius: 70px;
+  padding: 15px;
 }
 </style>
