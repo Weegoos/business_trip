@@ -26,6 +26,25 @@
             <p class="text-bold text-body1 q-my-md">{{ items.name }}</p>
             <p style="color: #999999">{{ items.post }}</p>
           </q-card-section>
+          <q-card-section>
+            <div
+              class="msgSection text-bold row"
+              align="left"
+              style="align-items: stretch"
+            >
+              <section class="col">
+                Say Hello <i class="fas fa-hand-paper"></i>
+              </section>
+              <section class="col" align="right">
+                <q-btn
+                  fab-mini
+                  icon="send"
+                  class="sendButtonStyle"
+                  @click="onClick"
+                />
+              </section>
+            </div>
+          </q-card-section>
         </q-card>
       </div>
     </section>
@@ -64,7 +83,18 @@ const teamArray = ref([
 
 .icon {
   background-color: #703bf7;
-  border-radius: 70px;
+  border-radius: 1000px;
   padding: 15px;
+}
+
+.msgSection {
+  background-color: #1a1a1a;
+  border: solid #262626 1px;
+  padding: 20px;
+  border-radius: 70px;
+}
+
+.sendButtonStyle {
+  background-color: #703bf7;
 }
 </style>
