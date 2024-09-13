@@ -1,6 +1,9 @@
 <template>
   <div>
-    <section class="row q-gutter-md">
+    <section
+      class="q-gutter-md"
+      :class="$q.screen.width < mobileVersion ? 'col' : 'row'"
+    >
       <div class="q-pa-xl col">
         <img
           class="propertiesIcon"
@@ -31,7 +34,11 @@
         </div>
       </div>
       <div class="col">
-        <img src="../../assets/about/aboutImage.png" alt="" />
+        <q-img
+          src="../../assets/about/aboutImage.png"
+          alt=""
+          :ratio="18 / 10"
+        />
       </div>
     </section>
   </div>
@@ -39,7 +46,11 @@
 
 <script setup>
 import { ref } from "vue";
-
+import { useRouter } from "vue-router";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 const stats = ref([
   {
     number: 200,
