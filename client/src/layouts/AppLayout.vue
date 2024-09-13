@@ -61,7 +61,7 @@
                 flat
                 no-caps
                 label="Properties"
-                @click="onClick"
+                @click="pushToPropertiesPage"
                 class="btn"
                 :class="currentPath === '/properties' ? 'active' : 'unactive'"
               />
@@ -190,6 +190,10 @@ const pushToAboutPage = () => {
   router.push("/about");
 };
 
+const pushToPropertiesPage = () => {
+  router.push("/properties");
+};
+
 const drawerButton = ref([
   {
     name: "Home",
@@ -204,6 +208,7 @@ const drawerButton = ref([
   {
     name: "Properties",
     icon: "fas fa-building",
+    link: "/properties",
   },
   {
     name: "Services",
