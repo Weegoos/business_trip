@@ -11,7 +11,10 @@
       purchase your dream property with ease. Here's a step-by-step guide to how
       it all works.
     </p>
-    <section class="q-mt-md row q-gutter-md">
+    <section
+      class="q-mt-md q-gutter-md"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
       <div v-for="(items, index) in navigationStep" :key="index" class="col">
         <q-card class="card col">
           <q-card-section>
@@ -22,7 +25,10 @@
         </q-card>
       </div>
     </section>
-    <section class="q-mt-md row q-gutter-md">
+    <section
+      class="q-mt-md q-gutter-md"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
       <div v-for="(items, index) in navigationStep" :key="index" class="col">
         <q-card class="card col">
           <q-card-section>
@@ -38,7 +44,10 @@
 
 <script setup>
 import { ref } from "vue";
-
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 const navigationStep = ref([
   {
     name: "Discover a World of Possibilities",
