@@ -11,7 +11,10 @@
       team. Get to know the people behind our mission to make your real estate
       dreams a reality.</span
     >
-    <section class="row q-gutter-md">
+    <section
+      class="q-gutter-md"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
       <div v-for="(items, index) in teamArray" :key="index" class="col">
         <q-card class="card q-mt-md">
           <q-card-section align="center">
@@ -19,7 +22,10 @@
               style="width: 50%; border-radius: 5px"
               :src="`https://cdn.quasar.dev/img/avatar${index + 1}.jpg`"
             >
-              <div class="bg-transparent absolute-bottom text-body1">
+              <div
+                class="bg-transparent absolute-bottom text-body1"
+                style="margin-top: 75px"
+              >
                 <i class="fab fa-twitter icon"></i>
               </div>
             </q-img>
@@ -28,7 +34,8 @@
           </q-card-section>
           <q-card-section>
             <div
-              class="msgSection text-bold row"
+              class="msgSection text-bold"
+              :clas="$q.screen.width < mobileVersion ? 'col' : 'row'"
               align="left"
               style="align-items: stretch"
             >
@@ -53,6 +60,10 @@
 
 <script setup>
 import { ref } from "vue";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 
 const teamArray = ref([
   {
