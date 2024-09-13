@@ -19,7 +19,12 @@
             <span class="text-bold text-h6">ABC Corporation</span>
           </section>
           <section class="col" align="right">
-            <q-btn color="primary" icon="check" label="OK" @click="onClick" />
+            <q-btn
+              class="visitButton q-pa-md"
+              no-caps
+              label="Visit Website"
+              @click="onClick"
+            />
           </section>
         </div>
       </q-card-section>
@@ -39,5 +44,10 @@ export default {};
   background-color: #141414;
   border: solid #262626 8px;
   border-radius: 7px;
+}
+
+.visitButton {
+  background-color: #141414;
+  border: solid #262626 1px;
 }
 </style>
