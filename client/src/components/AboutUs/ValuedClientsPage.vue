@@ -11,6 +11,22 @@
       clients across various industries. Here are some of the clients we've had
       the pleasure of serving
     </p>
+    <q-card class="card">
+      <q-card-section>
+        <div class="row q-gutter-md">
+          <section class="col">
+            <p style="color: #999999" class="text-body1">Since 2019</p>
+            <span class="text-bold text-h6">ABC Corporation</span>
+          </section>
+          <section class="col" align="right">
+            <q-btn color="primary" icon="check" label="OK" @click="onClick" />
+          </section>
+        </div>
+      </q-card-section>
+      <q-card-section>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 
@@ -18,4 +34,10 @@
 export default {};
 </script>
 
-<style></style>
+<style scoped>
+.card {
+  background-color: #141414;
+  border: solid #262626 8px;
+  border-radius: 7px;
+}
+</style>
