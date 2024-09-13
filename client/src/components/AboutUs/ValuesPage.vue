@@ -1,7 +1,13 @@
 <template>
   <div>
-    <section class="row q-gutter-md">
-      <div class="q-pa-xl col">
+    <section
+      class="q-gutter-md"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
+      <div
+        class="col"
+        :class="$q.screen.width > mobileWidth ? 'q-pa-xl' : 'q-px-md'"
+      >
         <img
           class="propertiesIcon"
           src="../../assets/indexPage/FeaturedPropertiesIntro.png"
@@ -14,10 +20,16 @@
           platform that transcended the ordinary.
         </p>
       </div>
-      <div class="col q-pa-xl">
+      <div
+        class="col"
+        :class="$q.screen.width > mobileWidth ? 'q-pa-xl' : 'q-px-md'"
+      >
         <q-card class="card">
           <q-card-section>
-            <div class="row q-gutter-md">
+            <div
+              class="q-gutter-md"
+              :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+            >
               <div class="col">
                 <q-btn
                   fab
@@ -48,7 +60,10 @@
                 </p>
               </div>
             </div>
-            <div class="row q-gutter-md q-mt-md">
+            <div
+              class="q-gutter-md q-mt-md"
+              :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+            >
               <div class="col">
                 <q-btn
                   fab
@@ -86,8 +101,11 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 </script>
 
 <style scoped>
