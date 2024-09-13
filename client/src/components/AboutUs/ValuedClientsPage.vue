@@ -26,7 +26,7 @@
                 class="visitButton q-pa-md"
                 no-caps
                 label="Visit Website"
-                @click="onClick"
+                @click="visit"
               />
             </section>
           </div>
@@ -40,6 +40,7 @@
 </template>
 
 <script setup>
+import { useQuasar } from "quasar";
 import { ref } from "vue";
 
 const client = ref([
@@ -52,6 +53,13 @@ const client = ref([
     year: 2018,
   },
 ]);
+
+const $q = useQuasar();
+const visit = () => {
+  $q.notify({
+    message: "Visit Button has been clicked by User",
+  });
+};
 </script>
 
 <style scoped>
