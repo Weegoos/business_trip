@@ -42,8 +42,15 @@
             </section>
           </div>
         </q-card-section>
-        <q-card-section>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        <q-card-section class="q-pa-md">
+          <q-card class="comments">
+            <q-card-section>
+              <div class="text-h6" style="color: #999999">
+                What They Said 🤗
+              </div>
+              <div class="text-subtitle2">{{ item.comments }}</div>
+            </q-card-section>
+          </q-card>
         </q-card-section>
       </q-card>
     </div>
@@ -60,12 +67,14 @@ const client = ref([
     year: 2019,
     domain: "Commercial Real Estate",
     category: "Luxury Home Development",
+    comments: `Estatein's expertise in finding the perfect office space for our expanding operations was invaluable. They truly understand our business needs.`,
   },
   {
     coorporation: "GreenTech Enterprises",
     year: 2018,
     domain: "Commercial Real Estate",
     category: "Retail Space",
+    comments: `Estatein's ability to identify prime retail locations helped us expand our brand presence. They are a trusted partner in our growth.`,
   },
 ]);
 
@@ -85,6 +94,11 @@ const visit = () => {
 }
 
 .visitButton {
+  background-color: #141414;
+  border: solid #262626 1px;
+}
+
+.comments {
   background-color: #141414;
   border: solid #262626 1px;
 }
