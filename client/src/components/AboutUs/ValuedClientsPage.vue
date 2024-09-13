@@ -12,17 +12,26 @@
       clients across various industries. Here are some of the clients we've had
       the pleasure of serving
     </p>
-    <div class="row q-gutter-md">
+    <div
+      class="q-gutter-md"
+      :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+    >
       <q-card class="card col" v-for="(item, index) in client" :key="index">
         <q-card-section>
-          <div class="row q-gutter-md">
+          <div
+            class="q-gutter-md"
+            :class="$q.screen.width < mobileVersion ? 'col' : 'row'"
+          >
             <section class="col">
               <p style="color: #999999" class="text-body1">
                 Since {{ item.year }}
               </p>
               <span class="text-bold text-h6">{{ item.coorporation }}</span>
             </section>
-            <section class="col" align="right">
+            <section
+              class="col"
+              :align="$q.screen.width < mobileVersion ? 'left' : 'right'"
+            >
               <q-btn
                 class="visitButton q-pa-md"
                 no-caps
@@ -71,6 +80,10 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref } from "vue";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 
 const client = ref([
   {
