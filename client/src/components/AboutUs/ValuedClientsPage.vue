@@ -1,3 +1,4 @@
+<!-- Valued Clients Page -->
 <template>
   <div class="q-pa-xl">
     <img
