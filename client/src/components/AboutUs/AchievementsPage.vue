@@ -13,7 +13,10 @@
         that transcended the ordinary.
       </p>
 
-      <section class="row q-gutter-md">
+      <section
+        class="q-gutter-md"
+        :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+      >
         <div
           v-for="(content, index) in listOfAchievements"
           :key="index"
@@ -33,6 +36,10 @@
 
 <script setup>
 import { ref } from "vue";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const mobileWidth = proxy.$mobileWidth;
+const mobileVersion = proxy.$mobileVersion;
 
 const listOfAchievements = ref([
   {
