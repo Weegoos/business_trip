@@ -32,7 +32,7 @@
               align="left"
               style="align-items: stretch"
             >
-              <section class="col">
+              <section class="col text-h6">
                 Say Hello <i class="fas fa-hand-paper"></i>
               </section>
               <section class="col" align="right">
