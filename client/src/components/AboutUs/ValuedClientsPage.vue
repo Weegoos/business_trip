@@ -54,6 +54,16 @@
         </q-card-section>
       </q-card>
     </div>
+    <q-card class="my-card row q-mt-md">
+      <q-card-section class="col">
+        <span class="pages">01</span
+        ><span class="pages" style="color: #999999"> of 60</span>
+      </q-card-section>
+      <q-card-actions class="col" align="right">
+        <q-btn flat fab-mini icon="keyboard_arrow_left" />
+        <q-btn flat fab-mini icon="keyboard_arrow_right" />
+      </q-card-actions>
+    </q-card>
   </div>
 </template>
 
@@ -101,5 +111,15 @@ const visit = () => {
 .comments {
   background-color: #141414;
   border: solid #262626 1px;
+}
+
+.my-card {
+  background-color: #141414;
+  border: solid #262626 1px;
+  border-radius: 7px;
+}
+
+.pages {
+  font-size: 18px;
 }
 </style>
