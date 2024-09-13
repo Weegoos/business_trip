@@ -23,6 +23,8 @@
                 <i class="fab fa-twitter icon"></i>
               </div>
             </q-img>
+            <p class="text-bold text-body1 q-my-md">{{ items.name }}</p>
+            <p style="color: #999999">{{ items.post }}</p>
           </q-card-section>
         </q-card>
       </div>
