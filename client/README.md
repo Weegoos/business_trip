@@ -38,7 +38,7 @@ npm run format
 quasar build
 ```
 
-### Customize the configuration
+### Customize the configuration/home/batyr_ashim/Рабочий стол/ГТС проекты/jsc-sts/JSC-STS-referal
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
 

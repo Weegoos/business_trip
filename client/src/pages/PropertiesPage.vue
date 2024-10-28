@@ -8,6 +8,11 @@
         offering a unique story and a chance to redefine your life. With
         categories to suit every dreamer, your journey
       </p>
+      <iframe
+        style="width: 100%; height: 100vh"
+        src="https://www.mashvisor.com/explore/search/investment/us/ga/atlanta/overview#lat=33.7489954&lng=-84.3879824"
+        frameborder="0"
+      ></iframe>
     </section>
   </div>
 </template>

@@ -158,6 +158,7 @@ import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import FooterPage from "../pages/FooterPage.vue";
 import { setCssVar } from "quasar";
+import axios from "axios";
 setCssVar("background", "red");
 const drawer = ref(true);
 const $q = useQuasar();
@@ -242,6 +243,28 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("resize", updateWidth);
 });
+
+const propertyData = ref(null); // Создаем реактивную переменную для хранения данных
+
+// onMounted(async () => {
+//   try {
+//     const response = await axios.get("https://api.mashvisor.com/v1/property", {
+//       headers: {
+//         Authorization: "Bearer YOUR_API_TOKEN_HERE", // замените на ваш токен
+//       },
+//       params: {
+//         location: "New York", // например, место для поиска
+//         property_type: "Single Family", // тип недвижимости
+//         // другие параметры...
+//       },
+//     });
+//     console.log(response.data);
+
+//     propertyData.value = response.data; // Сохраняем данные в реактивную переменную
+//   } catch (error) {
+//     console.error("Ошибка при получении данных о недвижимости:", error);
+//   }
+// });
 </script>
 
 <style scoped>
