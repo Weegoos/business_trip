@@ -34,7 +34,8 @@
 
               <q-tab-panel name="prediction">
                 <div class="text-h4 q-mb-md">Prediction with AI</div>
-                <div ref="chart" style="width: 100%; height: 500px"></div>
+                <h2>Income of Selected Countries since 1950</h2>
+                <div ref="chart" style="width: 100%; height: 400px"></div>
               </q-tab-panel>
             </q-tab-panels>
           </template>
@@ -48,7 +49,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount, ref, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 import * as echarts from "echarts";
 const tab = ref("details");
@@ -78,41 +79,41 @@ const closeView = () => {
 
 const chart = ref(null);
 const chartInstance = ref(null);
-
-const countries = [
-  "Finland",
-  "France",
-  "Germany",
-  "Iceland",
-  "Norway",
-  "Poland",
-  "Russia",
-  "United Kingdom",
+const rawData = [
+  { Country: "USA", Year: 1950, Income: 10000 },
+  { Country: "USA", Year: 1960, Income: 12000 },
+  { Country: "USA", Year: 1970, Income: 14000 },
+  { Country: "USA", Year: 1980, Income: 16000 },
+  { Country: "USA", Year: 1990, Income: 18000 },
+  { Country: "USA", Year: 2000, Income: 20000 },
+  { Country: "USA", Year: 2010, Income: 22000 },
+  { Country: "USA", Year: 2020, Income: 24000 },
+  { Country: "Canada", Year: 1950, Income: 8000 },
+  { Country: "Canada", Year: 1960, Income: 10000 },
+  { Country: "Canada", Year: 1970, Income: 12000 },
+  { Country: "Canada", Year: 1980, Income: 14000 },
+  { Country: "Canada", Year: 1990, Income: 16000 },
+  { Country: "Canada", Year: 2000, Income: 18000 },
+  { Country: "Canada", Year: 2010, Income: 20000 },
+  { Country: "Canada", Year: 2020, Income: 22000 },
 ];
 
-const loadChartData = async () => {
-  try {
-    const response = await fetch("/data/life-expectancy-table.json"); // Relative path from the public folder
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    const rawData = await response.json();
-    initChart(rawData);
-  } catch (error) {
-    console.error("Error loading chart data:", error);
-  }
-};
-
-const initChart = (rawData) => {
+// Initialize the chart
+const initChart = () => {
+  // Dispose of the existing chart instance if it exists
   if (chartInstance.value) {
     chartInstance.value.dispose();
   }
+
+  // Initialize ECharts instance
   chartInstance.value = echarts.init(chart.value);
 
   const datasetWithFilters = [];
   const seriesList = [];
+  const countries = ["USA", "Canada"];
 
-  echarts.util.each(countries, (country) => {
+  // Create datasets and series for each country
+  countries.forEach((country) => {
     const datasetId = `dataset_${country}`;
     datasetWithFilters.push({
       id: datasetId,
@@ -132,16 +133,6 @@ const initChart = (rawData) => {
       datasetId: datasetId,
       showSymbol: false,
       name: country,
-      endLabel: {
-        show: true,
-        formatter: (params) => `${params.value[3]}: ${params.value[0]}`,
-      },
-      labelLayout: {
-        moveOverlap: "shiftY",
-      },
-      emphasis: {
-        focus: "series",
-      },
       encode: {
         x: "Year",
         y: "Income",
@@ -153,7 +144,7 @@ const initChart = (rawData) => {
   });
 
   const option = {
-    animationDuration: 10000,
+    animationDuration: 1000,
     dataset: [
       {
         id: "dataset_raw",
@@ -165,18 +156,14 @@ const initChart = (rawData) => {
       text: "Income of Selected Countries since 1950",
     },
     tooltip: {
-      order: "valueDesc",
       trigger: "axis",
     },
     xAxis: {
       type: "category",
-      nameLocation: "middle",
+      name: "Year",
     },
     yAxis: {
       name: "Income",
-    },
-    grid: {
-      right: 140,
     },
     series: seriesList,
   };
@@ -184,11 +171,13 @@ const initChart = (rawData) => {
   chartInstance.value.setOption(option);
 };
 
-onMounted(loadChartData);
-
-onBeforeUnmount(() => {
-  if (chartInstance.value) {
-    chartInstance.value.dispose();
+// Lifecycle hook to initialize the chart once the component is mounted
+onMounted(() => {
+  // Check if the chart ref is available and then initialize
+  if (chart.value) {
+    initChart();
+  } else {
+    console.error("Chart DOM element is not available.");
   }
 });
 </script>
