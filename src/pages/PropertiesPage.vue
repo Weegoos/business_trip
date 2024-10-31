@@ -91,7 +91,11 @@
         </q-card>
       </div>
     </section>
-    <ViewDetails :homeInfo="homeInfo" :openViewPage="openViewPage" />
+    <ViewDetails
+      :homeInfo="homeInfo"
+      :openViewPage="openViewPage"
+      @closeView="closeView"
+    />
   </div>
 </template>
 
@@ -154,6 +158,10 @@ const homeInfo = ref("");
 const viewProperty = (itemInfo) => {
   openViewPage.value = true;
   homeInfo.value = itemInfo;
+};
+
+const closeView = () => {
+  openViewPage.value = false;
 };
 </script>
 
