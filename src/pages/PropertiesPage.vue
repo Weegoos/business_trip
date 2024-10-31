@@ -8,17 +8,33 @@
         offering a unique story and a chance to redefine your life. With
         categories to suit every dreamer, your journey
       </p>
-      <iframe
-        style="width: 100%; height: 100vh"
-        src="https://www.mashvisor.com/explore/search/investment/us/ga/atlanta/overview#lat=33.7489954&lng=-84.3879824"
-        frameborder="0"
-      ></iframe>
+    </section>
+    <section class="">
+      <div class="q-pa-xl bg-black">
+        <q-input
+          v-model="text"
+          type="text"
+          class="propertiesInputClass text-white"
+          dense
+          label-color="white"
+          label="Search For A Property"
+          standout="bg-black text-white"
+        />
+      </div>
     </section>
   </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { ref } from "vue";
+
+const text = ref("");
 </script>
 
-<style></style>
+<style scoped>
+.propertiesInputClass {
+  border: solid white 1px;
+  color: white;
+  border-radius: 5px;
+}
+</style>
