@@ -1,14 +1,38 @@
 <template>
   <div>
     <q-dialog v-model="confirm" persistent>
-      <q-card>
-        <q-card-section class="row items-center">
-          <q-avatar icon="signal_wifi_off" color="primary" text-color="white" />
-          <span class="q-ml-sm">{{ props.homeInfo.name }}</span>
-        </q-card-section>
+      <q-card class="my-card" style="width: 800px">
+        <q-splitter v-model="splitterModel">
+          <template v-slot:before>
+            <q-tabs v-model="tab" vertical class="text-teal">
+              <q-tab name="details" icon="info" label="Details" />
+              <q-tab name="prediction" icon="computer" label="Prediction" />
+            </q-tabs>
+          </template>
+
+          <template v-slot:after>
+            <q-tab-panels
+              v-model="tab"
+              animated
+              swipeable
+              vertical
+              transition-prev="jump-up"
+              transition-next="jump-up"
+            >
+              <q-tab-panel name="details">
+                <div class="text-h4 q-mb-md">Details</div>
+                <img :src="props.homeInfo.icon" alt="" />
+                <p class="text-h6">{{ props.homeInfo.name }}</p>
+              </q-tab-panel>
+
+              <q-tab-panel name="prediction">
+                <div class="text-h4 q-mb-md">Prediction</div>
+              </q-tab-panel>
+            </q-tab-panels>
+          </template>
+        </q-splitter>
         <q-card-actions align="right">
-          <q-btn flat label="Cancel" color="primary" v-close-popup />
-          <q-btn flat label="Turn on Wifi" color="primary" v-close-popup />
+          <q-btn flat label="Закрыть" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -18,6 +42,7 @@
 <script setup>
 import { ref, watch } from "vue";
 
+const tab = ref("details");
 const props = defineProps({
   homeInfo: {
     type: Object,
