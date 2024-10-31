@@ -75,7 +75,9 @@
           <div :class="$q.screen.width < mobileVersion ? 'col' : 'row'">
             <q-card-section class="col">
               <span class="price" style="color: #999999">Price</span>
-              <span class="price" style="font-size: 24px">$550.000</span>
+              <span class="price" style="font-size: 24px"
+                >${{ items.price }}</span
+              >
             </q-card-section>
             <q-card-actions align="right" class="col">
               <q-btn
@@ -109,6 +111,7 @@ const propertyList = ref([
     bedroom: "4-Bedroom",
     bathroom: "3-Bathroom",
     type: "Villa",
+    price: 540000,
   },
   {
     icon: metropolitan,
@@ -118,6 +121,7 @@ const propertyList = ref([
     bedroom: "2-Bedroom",
     bathroom: "2-Bathroom",
     type: "Villa",
+    price: 500000,
   },
   {
     icon: cottage,
@@ -127,6 +131,7 @@ const propertyList = ref([
     bedroom: "3-Bedroom",
     bathroom: "3-Bathroom",
     type: "Villa",
+    price: 450000,
   },
 ]);
 
