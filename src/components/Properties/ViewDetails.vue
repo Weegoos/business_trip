@@ -23,6 +23,13 @@
                 <div class="text-h4 q-mb-md">Details</div>
                 <img :src="props.homeInfo.icon" alt="" />
                 <p class="text-h6">{{ props.homeInfo.name }}</p>
+                <p class="text-body1">
+                  <span class="text-bold">Type</span>: {{ props.homeInfo.type }}
+                </p>
+                <p class="text-body1">
+                  <span class="text-bold">Description</span>:
+                  {{ props.homeInfo.description }}
+                </p>
               </q-tab-panel>
 
               <q-tab-panel name="prediction">
