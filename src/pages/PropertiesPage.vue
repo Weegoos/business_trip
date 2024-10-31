@@ -32,11 +32,60 @@
           />
         </div>
       </div>
-      <div v-for="(item, index) in filteredProducts" :key="index">
-        <q-card class="my-card bg-grey">
-          <q-card-section>
-            {{ item.name }}
+      <div
+        class="q-my-lg q-gutter-md"
+        :class="$q.screen.width < mobileWidth ? 'col' : 'row'"
+      >
+        <q-card
+          class="featuredCard col"
+          v-for="(items, id) in filteredProducts"
+          :key="id"
+        >
+          <q-card-section align="center">
+            <img :src="items.icon" alt="" style="width: 100%" />
           </q-card-section>
+          <q-card-section class="contentSection">
+            <span class="sectionHeadline">{{ items.name }}</span>
+            <span class="description">{{ items.description }}</span>
+          </q-card-section>
+          <q-card-section class="contentSection">
+            <q-chip clickable class="chip">
+              <template v-slot="">
+                <img class="chipIcon" :src="bedroom" alt="" />
+                <span class="chipText">{{ items.bedroom }}</span>
+              </template>
+            </q-chip>
+            <q-chip clickable class="chip">
+              <template v-slot="">
+                <img class="chipIcon" :src="bathroom" alt="" />
+                <span class="chipText">{{ items.bathroom }}</span>
+              </template>
+            </q-chip>
+            <q-chip clickable class="chip">
+              <template v-slot="">
+                <img
+                  class="chipIcon"
+                  src="../assets/indexPage/type.png"
+                  alt=""
+                />
+                <span class="chipText">{{ items.type }}</span>
+              </template>
+            </q-chip>
+          </q-card-section>
+          <div :class="$q.screen.width < mobileVersion ? 'col' : 'row'">
+            <q-card-section class="col">
+              <span class="price" style="color: #999999">Price</span>
+              <span class="price" style="font-size: 24px">$550.000</span>
+            </q-card-section>
+            <q-card-actions align="right" class="col">
+              <q-btn
+                class="moreDetailsButton"
+                flat
+                no-caps
+                label="View Property Details"
+              />
+            </q-card-actions>
+          </div>
         </q-card>
       </div>
     </section>
@@ -45,13 +94,39 @@
 
 <script setup>
 import { computed, ref } from "vue";
+import villa from "../assets/indexPage/villa.png";
+import metropolitan from "../assets/indexPage/metropolitan.png";
+import cottage from "../assets/indexPage/cottage.png";
+import bathroom from "../assets/indexPage/bathroom.png";
+import bedroom from "../assets/indexPage/bedroom.png";
 
 const propertyList = ref([
   {
-    name: "Batyr",
+    icon: villa,
+    name: "Seaside Serenity Villa",
+    description:
+      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood",
+    bedroom: "4-Bedroom",
+    bathroom: "3-Bathroom",
+    type: "Villa",
   },
   {
-    name: "Aibar",
+    icon: metropolitan,
+    name: "Metropolitan Haven",
+    description:
+      "A chic and fully-furnished 2-bedroom apartment with panoramic city views..",
+    bedroom: "2-Bedroom",
+    bathroom: "2-Bathroom",
+    type: "Villa",
+  },
+  {
+    icon: cottage,
+    name: "Rustic Retreat Cottage",
+    description:
+      "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community..",
+    bedroom: "3-Bedroom",
+    bathroom: "3-Bathroom",
+    type: "Villa",
   },
 ]);
 
@@ -77,5 +152,42 @@ const filteredProducts = computed(() => {
 
 .button {
   background-color: #703bf7;
+}
+
+.featuredCard {
+  background-color: #1a1a1a;
+  border: solid #262626 1px;
+}
+
+.featuredCardActions {
+  background-color: transparent;
+}
+
+.chip {
+  background-color: #1a1a1a;
+  border: solid #262626 1px;
+  color: white;
+  padding: 15px;
+  align-items: center;
+}
+
+.chipIcon {
+  height: 18px;
+  margin-right: 10px;
+}
+
+.chipText {
+  margin-top: 3px;
+}
+
+.price {
+  line-height: 1.2;
+  display: block;
+}
+
+.moreDetailsButton {
+  background-color: #703bf7;
+  padding: 15px;
+  border-radius: 10px;
 }
 </style>
