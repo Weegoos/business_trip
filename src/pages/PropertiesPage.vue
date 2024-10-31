@@ -45,8 +45,7 @@
             <img :src="items.icon" alt="" style="width: 100%" />
           </q-card-section>
           <q-card-section class="contentSection">
-            <span class="sectionHeadline">{{ items.name }}</span>
-            <span class="description">{{ items.description }}</span>
+            <span class="sectionHeadline text-h6">{{ items.name }}</span>
           </q-card-section>
           <q-card-section class="contentSection">
             <q-chip clickable class="chip">
@@ -85,12 +84,14 @@
                 flat
                 no-caps
                 label="View Property Details"
+                @click="viewProperty(items)"
               />
             </q-card-actions>
           </div>
         </q-card>
       </div>
     </section>
+    <ViewDetails :homeInfo="homeInfo" :openViewPage="openViewPage" />
   </div>
 </template>
 
@@ -101,13 +102,14 @@ import metropolitan from "../assets/indexPage/metropolitan.png";
 import cottage from "../assets/indexPage/cottage.png";
 import bathroom from "../assets/indexPage/bathroom.png";
 import bedroom from "../assets/indexPage/bedroom.png";
+import ViewDetails from "../components/Properties/ViewDetails.vue";
 
 const propertyList = ref([
   {
     icon: villa,
     name: "Seaside Serenity Villa",
     description:
-      "A stunning 4-bedroom, 3-bathroom villa in a peaceful suburban neighborhood",
+      "A magnificent 4-bedroom, 3-bathroom villa located in a peaceful suburban neighborhood, ideal for a large family or group of friends. This home combines luxury with comfort, offering spacious, bright rooms, modern design, and a private garden. It’s close to the coast, providing easy access to beaches and scenic walking paths.",
     bedroom: "4-Bedroom",
     bathroom: "3-Bathroom",
     type: "Villa",
@@ -117,20 +119,20 @@ const propertyList = ref([
     icon: metropolitan,
     name: "Metropolitan Haven",
     description:
-      "A chic and fully-furnished 2-bedroom apartment with panoramic city views..",
+      "A chic, fully-furnished 2-bedroom apartment with breathtaking city views. This apartment offers a modern lifestyle with premium amenities, including a fitness center and rooftop lounge. Situated in the heart of the city, it’s perfect for those who enjoy an urban lifestyle with easy access to shopping, dining, and entertainment.",
     bedroom: "2-Bedroom",
     bathroom: "2-Bathroom",
-    type: "Villa",
+    type: "Apartment",
     price: 500000,
   },
   {
     icon: cottage,
     name: "Rustic Retreat Cottage",
     description:
-      "An elegant 3-bedroom, 2.5-bathroom townhouse in a gated community..",
+      "An elegant 3-bedroom, 2.5-bathroom cottage in a gated community, combining rustic charm with modern comfort. This property features a cozy living area with a fireplace, spacious bedrooms, and a beautiful garden. Ideal for those who love tranquility but want to stay close to local amenities and community facilities.",
     bedroom: "3-Bedroom",
-    bathroom: "3-Bathroom",
-    type: "Villa",
+    bathroom: "2.5-Bathroom",
+    type: "Cottage",
     price: 450000,
   },
 ]);
@@ -146,6 +148,13 @@ const filteredProducts = computed(() => {
     property.name.toLowerCase().includes(query)
   );
 });
+
+const openViewPage = ref(false);
+const homeInfo = ref("");
+const viewProperty = (itemInfo) => {
+  openViewPage.value = true;
+  homeInfo.value = itemInfo;
+};
 </script>
 
 <style scoped>
