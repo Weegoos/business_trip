@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-dialog v-model="confirm" persistent>
+    <q-dialog v-model="confirm" persistent :full-width="isFullWidth">
       <q-card class="my-card" style="width: 800px">
         <q-splitter v-model="splitterModel">
           <template v-slot:before>
@@ -34,8 +34,21 @@
 
               <q-tab-panel name="prediction">
                 <div class="text-h4 q-mb-md">Prediction with AI</div>
+                <q-btn
+                  color="primary"
+                  icon="check"
+                  label="Start forecasting"
+                  @click="start"
+                />
+                <div class="q-pa-md">
+                  <q-btn
+                    color="purple"
+                    @click="showMultipleGroups"
+                    label="Show Multiple Groups"
+                  />
+                </div>
                 <section class="row q-gutter-md">
-                  <div class="col">
+                  <div class="col" v-if="isAIGenerated == true">
                     <div ref="lineChart" class="linearChart"></div>
                     <p class="description" align="center">
                       Цены с 2024 по 2029 год
@@ -43,6 +56,7 @@
                     <q-btn
                       @click="updateLineChartData"
                       label="Обновить данные"
+                      color="positive"
                     />
                   </div>
                 </section>
@@ -72,6 +86,7 @@ import {
   LegendComponent,
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
+import { useQuasar } from "quasar";
 
 // Регистрация необходимых компонентов
 echarts.use([
@@ -221,11 +236,11 @@ const createLineChart = (item, years, prices) => {
   myChart.setOption(option);
 };
 
-// Данные для линейного графика
 let years = ["2024", "2025", "2026", "2027", "2028", "2029"];
-let prices = [100, 200, 150, 300, 250, 400];
+let prices = [540000, 500000, 600000, 800000, 900000, 655000];
 
 // Функция для обновления данных линейного графика
+const isFullWidth = ref(false);
 const updateLineChartData = () => {
   // Пример изменения данных, вы можете изменить эту логику для получения данных
   prices = prices.map((price) => price + Math.floor(Math.random() * 50 - 25)); // Случайные изменения цен
@@ -247,6 +262,12 @@ watch(
     }
   }
 );
+const $q = useQuasar();
+const start = () => {
+  $q.notify({
+    message: "Clicked",
+  });
+};
 </script>
 
 <style scoped>
