@@ -36,26 +36,15 @@
                 <div class="text-h4 q-mb-md">Prediction with AI</div>
                 <section class="row q-gutter-md">
                   <div class="col">
-                    <q-card class="my-card row">
-                      <div class="col">
-                        <div refs="power" class="chart"></div>
-                        <p class="description" align="center">Сила</p>
-                      </div>
-                      <!-- <div class="col">
-                        <div ref="endurance" class="chart"></div>
-                        <p class="description" align="center">Выносливость</p>
-                      </div>
-                      <div class="col">
-                        <div ref="speed" class="chart"></div>
-                        <p class="description" align="center">Скорость</p>
-                      </div> -->
-                    </q-card>
+                    <div ref="lineChart" class="linearChart"></div>
+                    <p class="description" align="center">
+                      Цены с 2024 по 2029 год
+                    </p>
+                    <q-btn
+                      @click="updateLineChartData"
+                      label="Обновить данные"
+                    />
                   </div>
-                  <!-- <div class="col">
-                    <q-card class="my-card">
-                      <div ref="chartContainer" class="linearChart"></div>
-                    </q-card>
-                  </div> -->
                 </section>
               </q-tab-panel>
             </q-tab-panels>
@@ -71,7 +60,6 @@
 
 <script setup>
 import { onMounted, ref, watch, nextTick } from "vue";
-
 import * as echarts from "echarts/core";
 import { PieChart, LineChart } from "echarts/charts";
 import {
@@ -85,6 +73,7 @@ import {
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 
+// Регистрация необходимых компонентов
 echarts.use([
   PieChart,
   LineChart,
@@ -99,10 +88,7 @@ echarts.use([
 ]);
 
 const power = ref(null);
-const endurance = ref(null);
-const speed = ref(null);
-const chartContainer = ref(null);
-
+const lineChart = ref(null);
 const tab = ref("details");
 const props = defineProps({
   homeInfo: {
@@ -115,6 +101,7 @@ const props = defineProps({
   },
 });
 
+// Используем confirm как реактивное значение для диалога
 const confirm = ref(props.openViewPage);
 watch(
   () => props.openViewPage,
@@ -128,22 +115,7 @@ const closeView = () => {
   emit("closeView");
 };
 
-watch(
-  () => confirm.value,
-  async (isOpen) => {
-    if (isOpen) {
-      await nextTick(); // Дождитесь обновления DOM
-      createChart(power.value, "Сила", "#FF5B5B", "#FFE4E4", 5, 95);
-      // Проверьте, инициализирован ли power.value
-      if (power.value) {
-        createChart(power.value, "Сила", "#FF5B5B", "#FFE4E4", 5, 95);
-      }
-      // Здесь также проверяйте endurance.value и speed.value
-      createLinearChart();
-    }
-  }
-);
-
+// Функция для создания графика
 const createChart = (
   item,
   itemName,
@@ -156,8 +128,8 @@ const createChart = (
     console.error("Chart container is not available");
     return;
   }
-  const myChart = echarts.init(item);
-  echarts.dispose(item);
+
+  const myChart = echarts.getInstanceByDom(item) || echarts.init(item);
 
   const option = {
     tooltip: {
@@ -209,101 +181,72 @@ const createChart = (
   };
 
   myChart.setOption(option);
-
-  window.addEventListener("resize", () => {
-    myChart.resize();
-  });
 };
 
-const createLinearChart = () => {
-  let base = +new Date(2020, 0, 1);
-  let oneDay = 24 * 3600 * 1000;
-  let data = [[base, Math.random() * 300]];
-  for (let i = 1; i < 365 * 2; i++) {
-    let now = new Date((base += oneDay));
-    data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])]);
+// Функция для создания линейного графика
+const createLineChart = (item, years, prices) => {
+  if (!item) {
+    console.error("Line chart container is not available");
+    return;
   }
 
-  const lineChart = echarts.init(chartContainer.value);
+  const myChart = echarts.getInstanceByDom(item) || echarts.init(item);
 
   const option = {
     tooltip: {
       trigger: "axis",
-      position: function (pt) {
-        return [pt[0], "10%"];
-      },
-    },
-    title: {
-      left: "center",
-      text: "График прогресса",
-    },
-    toolbox: {
-      feature: {
-        dataZoom: {
-          yAxisIndex: "none",
-          title: "Масштабирование",
-        },
-        restore: {
-          title: "Сброс",
-        },
-        saveAsImage: {
-          title: "Сохранить как изображение",
-        },
-      },
     },
     xAxis: {
-      type: "time",
+      type: "category",
+      data: years,
       boundaryGap: false,
-      axisLabel: {
-        formatter: function (value) {
-          let date = new Date(value);
-          return `${date.getFullYear()}-${
-            date.getMonth() + 1
-          }-${date.getDate()}`;
-        },
-        interval: 1000 * 60 * 60 * 24 * 7, // Показать метки каждую неделю
-      },
-      axisPointer: {
-        show: true,
-        type: "line",
-      },
     },
     yAxis: {
       type: "value",
-      boundaryGap: [0, "100%"],
     },
-    dataZoom: [
-      {
-        type: "inside",
-        start: 0,
-        end: 20,
-      },
-      {
-        start: 0,
-        end: 20,
-      },
-    ],
     series: [
       {
-        name: "Данные",
+        name: "Цены",
         type: "line",
+        data: prices,
         smooth: true,
-        symbol: "none",
-        areaStyle: {},
-        data: data,
+        lineStyle: {
+          color: "#FF5B5B",
+          width: 2,
+        },
       },
     ],
   };
 
-  lineChart.setOption(option);
-
-  window.addEventListener("resize", () => {
-    lineChart.resize();
-    [power.value, endurance.value, speed.value].forEach((chartEl) => {
-      if (chartEl) echarts.getInstanceByDom(chartEl)?.resize();
-    });
-  });
+  myChart.setOption(option);
 };
+
+// Данные для линейного графика
+let years = ["2024", "2025", "2026", "2027", "2028", "2029"];
+let prices = [100, 200, 150, 300, 250, 400];
+
+// Функция для обновления данных линейного графика
+const updateLineChartData = () => {
+  // Пример изменения данных, вы можете изменить эту логику для получения данных
+  prices = prices.map((price) => price + Math.floor(Math.random() * 50 - 25)); // Случайные изменения цен
+  createLineChart(lineChart.value, years, prices);
+};
+
+// Наблюдаем за открытием диалога
+watch(
+  () => confirm.value,
+  async (isOpen) => {
+    if (isOpen) {
+      await nextTick(); // Ждем, пока DOM обновится
+      if (power.value) {
+        createChart(power.value, "Сила", "#FF5B5B", "#FFE4E4", 5, 95);
+      }
+      if (lineChart.value) {
+        createLineChart(lineChart.value, years, prices);
+      }
+    }
+  }
+);
 </script>
 
 <style scoped>
