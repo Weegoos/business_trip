@@ -97,7 +97,7 @@ module.exports = configure(function (/* ctx */) {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: { loading },
+      config: {},
 
       iconSet: "fontawesome-v5",
       // lang: 'en-US', // Quasar language pack

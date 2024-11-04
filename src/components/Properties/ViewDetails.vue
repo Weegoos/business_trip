@@ -36,7 +36,7 @@
                 <div class="text-h4 q-mb-md">Prediction with AI</div>
                 <q-btn
                   color="primary"
-                  icon="check"
+                  no-caps
                   label="Start forecasting"
                   @click="start"
                 />
@@ -45,11 +45,11 @@
                   <div class="col" v-if="isAIGenerated == true">
                     <div ref="lineChart" class="linearChart"></div>
                     <p class="description" align="center">
-                      Цены с 2024 по 2029 год
+                      Prices from 2024 to 2029
                     </p>
                     <q-btn
                       @click="updateLineChartData"
-                      label="Обновить данные"
+                      label="Update"
                       color="positive"
                     />
                   </div>
@@ -235,6 +235,7 @@ let prices = [540000, 500000, 600000, 800000, 900000, 655000];
 
 // Функция для обновления данных линейного графика
 const isFullWidth = ref(false);
+
 const updateLineChartData = () => {
   // Пример изменения данных, вы можете изменить эту логику для получения данных
   prices = prices.map((price) => price + Math.floor(Math.random() * 50 - 25)); // Случайные изменения цен
@@ -267,6 +268,7 @@ onBeforeUnmount(() => {
 });
 
 const start = () => {
+  isFullWidth.value = true;
   const first = $q.loading.show({
     group: "first",
     message: "The data is being processed",
@@ -286,7 +288,7 @@ const start = () => {
       second();
 
       first({
-        message: "We hid the second group and updated the first group message",
+        message: "Click on the update button",
       });
 
       timer = setTimeout(() => {
@@ -300,9 +302,9 @@ const start = () => {
           (price) => price + Math.floor(Math.random() * 50 - 25)
         );
         createLineChart(lineChart.value, years, prices);
-      }, 2000);
-    }, 2000);
-  }, 1500);
+      }, 3000);
+    }, 4000);
+  }, 5000);
 };
 </script>
 
