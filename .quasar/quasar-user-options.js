@@ -15,9 +15,9 @@ import iconSet from 'quasar/icon-set/fontawesome-v5.js'
 
 
 
-import {Notify} from 'quasar'
+import {Notify,Loading} from 'quasar'
 
 
 
-export default { config: {},iconSet,plugins: {Notify} }
+export default { config: {},iconSet,plugins: {Notify,Loading} }
 

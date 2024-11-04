@@ -40,13 +40,7 @@
                   label="Start forecasting"
                   @click="start"
                 />
-                <div class="q-pa-md">
-                  <q-btn
-                    color="purple"
-                    @click="showMultipleGroups"
-                    label="Show Multiple Groups"
-                  />
-                </div>
+
                 <section class="row q-gutter-md">
                   <div class="col" v-if="isAIGenerated == true">
                     <div ref="lineChart" class="linearChart"></div>
@@ -73,7 +67,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref, watch, nextTick } from "vue";
+import { onMounted, ref, watch, nextTick, onBeforeUnmount } from "vue";
 import * as echarts from "echarts/core";
 import { PieChart, LineChart } from "echarts/charts";
 import {
@@ -263,10 +257,52 @@ watch(
   }
 );
 const $q = useQuasar();
+let timer;
+const isAIGenerated = ref(false);
+onBeforeUnmount(() => {
+  if (timer !== void 0) {
+    clearTimeout(timer);
+    $q.loading.hide();
+  }
+});
+
 const start = () => {
-  $q.notify({
-    message: "Clicked",
+  const first = $q.loading.show({
+    group: "first",
+    message: "The data is being processed",
+    spinnerColor: "amber",
+    messageColor: "amber",
   });
+
+  // hiding in 2s
+  timer = setTimeout(() => {
+    const second = $q.loading.show({
+      group: "second",
+      message: "The data is transmitted to the interface",
+    });
+
+    timer = setTimeout(() => {
+      // we hide second one (only); but we will still have the first one active
+      second();
+
+      first({
+        message: "We hid the second group and updated the first group message",
+      });
+
+      timer = setTimeout(() => {
+        $q.loading.hide();
+        timer = void 0;
+        $q.notify({
+          message: "Clicked",
+        });
+        isAIGenerated.value = true;
+        prices = prices.map(
+          (price) => price + Math.floor(Math.random() * 50 - 25)
+        );
+        createLineChart(lineChart.value, years, prices);
+      }, 2000);
+    }, 2000);
+  }, 1500);
 };
 </script>
 
