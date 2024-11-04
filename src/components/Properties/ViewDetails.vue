@@ -34,7 +34,29 @@
 
               <q-tab-panel name="prediction">
                 <div class="text-h4 q-mb-md">Prediction with AI</div>
-                <div ref="chart" style="width: 100%; height: 400px"></div>
+                <section class="row q-gutter-md">
+                  <div class="col">
+                    <q-card class="my-card row">
+                      <div class="col">
+                        <div refs="power" class="chart"></div>
+                        <p class="description" align="center">Сила</p>
+                      </div>
+                      <!-- <div class="col">
+                        <div ref="endurance" class="chart"></div>
+                        <p class="description" align="center">Выносливость</p>
+                      </div>
+                      <div class="col">
+                        <div ref="speed" class="chart"></div>
+                        <p class="description" align="center">Скорость</p>
+                      </div> -->
+                    </q-card>
+                  </div>
+                  <!-- <div class="col">
+                    <q-card class="my-card">
+                      <div ref="chartContainer" class="linearChart"></div>
+                    </q-card>
+                  </div> -->
+                </section>
               </q-tab-panel>
             </q-tab-panels>
           </template>
@@ -50,7 +72,37 @@
 <script setup>
 import { onMounted, ref, watch, nextTick } from "vue";
 
-import * as echarts from "echarts";
+import * as echarts from "echarts/core";
+import { PieChart, LineChart } from "echarts/charts";
+import {
+  TooltipComponent,
+  ToolboxComponent,
+  TitleComponent,
+  DataZoomComponent,
+  GridComponent,
+  AxisPointerComponent,
+  LegendComponent,
+} from "echarts/components";
+import { CanvasRenderer } from "echarts/renderers";
+
+echarts.use([
+  PieChart,
+  LineChart,
+  TooltipComponent,
+  ToolboxComponent,
+  TitleComponent,
+  DataZoomComponent,
+  GridComponent,
+  AxisPointerComponent,
+  LegendComponent,
+  CanvasRenderer,
+]);
+
+const power = ref(null);
+const endurance = ref(null);
+const speed = ref(null);
+const chartContainer = ref(null);
+
 const tab = ref("details");
 const props = defineProps({
   homeInfo: {
@@ -76,111 +128,195 @@ const closeView = () => {
   emit("closeView");
 };
 
-const chart = ref(null);
-const chartInstance = ref(null);
-
-// Hardcoded data
-const rawData = [
-  { Country: "USA", Year: 1950, Income: 10000 },
-  { Country: "USA", Year: 1960, Income: 12000 },
-  { Country: "USA", Year: 1970, Income: 14000 },
-  { Country: "USA", Year: 1980, Income: 16000 },
-  { Country: "USA", Year: 1990, Income: 18000 },
-  { Country: "USA", Year: 2000, Income: 20000 },
-  { Country: "USA", Year: 2010, Income: 22000 },
-  { Country: "USA", Year: 2020, Income: 24000 },
-  { Country: "Canada", Year: 1950, Income: 8000 },
-  { Country: "Canada", Year: 1960, Income: 10000 },
-  { Country: "Canada", Year: 1970, Income: 12000 },
-  { Country: "Canada", Year: 1980, Income: 14000 },
-  { Country: "Canada", Year: 1990, Income: 16000 },
-  { Country: "Canada", Year: 2000, Income: 18000 },
-  { Country: "Canada", Year: 2010, Income: 20000 },
-  { Country: "Canada", Year: 2020, Income: 22000 },
-];
-
-// Initialize the chart
-const initChart = () => {
-  if (chart.value) {
-    // Удаляем существующий экземпляр графика, если он есть
-    if (chartInstance.value) {
-      chartInstance.value.dispose();
+watch(
+  () => confirm.value,
+  async (isOpen) => {
+    if (isOpen) {
+      await nextTick(); // Дождитесь обновления DOM
+      createChart(power.value, "Сила", "#FF5B5B", "#FFE4E4", 5, 95);
+      // Проверьте, инициализирован ли power.value
+      if (power.value) {
+        createChart(power.value, "Сила", "#FF5B5B", "#FFE4E4", 5, 95);
+      }
+      // Здесь также проверяйте endurance.value и speed.value
+      createLinearChart();
     }
-    // Инициализируем экземпляр ECharts
-    chartInstance.value = echarts.init(chart.value);
+  }
+);
 
-    // Ваш код для настройки графика...
-    const datasetWithFilters = [];
-    const seriesList = [];
-    const countries = ["USA", "Canada"];
+const createChart = (
+  item,
+  itemName,
+  mainColor,
+  remainColor,
+  mainValue,
+  remainValue
+) => {
+  if (!item) {
+    console.error("Chart container is not available");
+    return;
+  }
+  const myChart = echarts.init(item);
+  echarts.dispose(item);
 
-    countries.forEach((country) => {
-      const datasetId = `dataset_${country}`;
-      datasetWithFilters.push({
-        id: datasetId,
-        fromDatasetId: "dataset_raw",
-        transform: {
-          type: "filter",
-          config: {
-            and: [
-              { dimension: "Year", gte: 1950 },
-              { dimension: "Country", "=": country },
-            ],
+  const option = {
+    tooltip: {
+      trigger: "item",
+    },
+    legend: {
+      show: false,
+    },
+    series: [
+      {
+        name: itemName,
+        type: "pie",
+        radius: ["50%", "70%"],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          color: mainColor,
+        },
+        label: {
+          show: true,
+          position: "center",
+          formatter: "{d}%",
+          fontSize: 40,
+          fontWeight: "bold",
+          color: "#4A4A4A",
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: "bold",
+            color: "#4A4A4A",
           },
         },
-      });
-      seriesList.push({
-        type: "line",
-        datasetId: datasetId,
-        showSymbol: false,
-        name: country,
-        encode: {
-          x: "Year",
-          y: "Income",
-          label: ["Country", "Income"],
-          itemName: "Year",
-          tooltip: ["Income"],
+        labelLine: {
+          show: false,
         },
-      });
-    });
+        data: [
+          { value: mainValue, name: itemName },
+          {
+            value: remainValue,
+            name: "Invisible",
+            itemStyle: { color: remainColor },
+            label: { show: false },
+            tooltip: { show: false },
+          },
+        ],
+      },
+    ],
+  };
 
-    const option = {
-      animationDuration: 1000,
-      dataset: [
-        {
-          id: "dataset_raw",
-          source: rawData,
-        },
-        ...datasetWithFilters,
-      ],
-      title: {
-        text: "Income of Selected Countries since 1950",
-      },
-      tooltip: {
-        trigger: "axis",
-      },
-      xAxis: {
-        type: "category",
-        name: "Year",
-      },
-      yAxis: {
-        name: "Income",
-      },
-      series: seriesList,
-    };
+  myChart.setOption(option);
 
-    chartInstance.value.setOption(option);
-  } else {
-    console.error("Chart DOM element is not available.");
-  }
+  window.addEventListener("resize", () => {
+    myChart.resize();
+  });
 };
 
-// Инициализация графика при монтировании компонента
-onMounted(() => {
-  nextTick(() => {
-    initChart();
+const createLinearChart = () => {
+  let base = +new Date(2020, 0, 1);
+  let oneDay = 24 * 3600 * 1000;
+  let data = [[base, Math.random() * 300]];
+  for (let i = 1; i < 365 * 2; i++) {
+    let now = new Date((base += oneDay));
+    data.push([+now, Math.round((Math.random() - 0.5) * 20 + data[i - 1][1])]);
+  }
+
+  const lineChart = echarts.init(chartContainer.value);
+
+  const option = {
+    tooltip: {
+      trigger: "axis",
+      position: function (pt) {
+        return [pt[0], "10%"];
+      },
+    },
+    title: {
+      left: "center",
+      text: "График прогресса",
+    },
+    toolbox: {
+      feature: {
+        dataZoom: {
+          yAxisIndex: "none",
+          title: "Масштабирование",
+        },
+        restore: {
+          title: "Сброс",
+        },
+        saveAsImage: {
+          title: "Сохранить как изображение",
+        },
+      },
+    },
+    xAxis: {
+      type: "time",
+      boundaryGap: false,
+      axisLabel: {
+        formatter: function (value) {
+          let date = new Date(value);
+          return `${date.getFullYear()}-${
+            date.getMonth() + 1
+          }-${date.getDate()}`;
+        },
+        interval: 1000 * 60 * 60 * 24 * 7, // Показать метки каждую неделю
+      },
+      axisPointer: {
+        show: true,
+        type: "line",
+      },
+    },
+    yAxis: {
+      type: "value",
+      boundaryGap: [0, "100%"],
+    },
+    dataZoom: [
+      {
+        type: "inside",
+        start: 0,
+        end: 20,
+      },
+      {
+        start: 0,
+        end: 20,
+      },
+    ],
+    series: [
+      {
+        name: "Данные",
+        type: "line",
+        smooth: true,
+        symbol: "none",
+        areaStyle: {},
+        data: data,
+      },
+    ],
+  };
+
+  lineChart.setOption(option);
+
+  window.addEventListener("resize", () => {
+    lineChart.resize();
+    [power.value, endurance.value, speed.value].forEach((chartEl) => {
+      if (chartEl) echarts.getInstanceByDom(chartEl)?.resize();
+    });
   });
-});
+};
 </script>
 
-<style></style>
+<style scoped>
+.description {
+  color: #464255;
+  font-size: 20px;
+}
+
+.chart {
+  height: 210px;
+}
+
+.linearChart {
+  height: 255px;
+}
+</style>
